@@ -1,0 +1,310 @@
+// Zmienne kolorów i stylów
+$input-focus: #2d8cf0;
+$font-color: #000000;
+$font-color-sub: #666;
+$bg-color: #fff;
+$main-color: #000000;
+$primary-color: #030201;
+$secondary-color: #46fc74;
+$text-color: #ffffff;
+$shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-w: 0 4px 6px rgba(255, 255, 255, 0.1);
+$bg-main: lightgrey;
+
+// Kartonowy cień i obramowanie
+$cartoon-border: 2px solid $main-color;
+$cartoon-shadow: 4px 4px $main-color;
+
+main {
+  background-color: $bg-main;
+  min-height: 100vh;
+  padding: 20px;
+
+  .main-ramka {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: $bg-main;
+    padding: 30px;
+    border-radius: 5px;
+    border: $cartoon-border;
+    box-shadow: $cartoon-shadow;
+
+    .parent {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto 1fr;
+      gap: 30px;
+      grid-template-areas:
+        "div1 div3"
+        "div4 div4";
+
+      .div1 {
+        grid-area: div1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .main-tytul {
+          h3 {
+            color: $font-color;
+            font-weight: 900;
+            font-size: 1.8em;
+            margin: 0;
+            padding: 15px 25px;
+            background: $bg-color;
+            border: $cartoon-border;
+            border-radius: 25px;
+            box-shadow: $cartoon-shadow;
+            text-align: center;
+            width: 350px;
+            transition: all 0.2s ease;
+
+            &:hover {
+              transform: translate(1px, 1px);
+              box-shadow: 3px 3px $main-color;
+            }
+          }
+        }
+      }
+
+      .div3 {
+        grid-area: div3;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .button {
+          background-color: $secondary-color;
+          color: $font-color;
+          padding: 12px 24px;
+          border: $cartoon-border;
+          border-radius: 5px;
+          font-weight: 600;
+          font-size: 17px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          box-shadow: $cartoon-shadow;
+
+          &:hover {
+            background-color: darken($secondary-color, 5%);
+          }
+
+          &:active {
+            box-shadow: 0px 0px $main-color;
+            transform: translate(3px, 3px);
+          }
+        }
+      }
+
+      .div4 {
+        grid-area: div4;
+        background: $bg-color;
+        padding: 25px;
+        border-radius: 5px;
+        border: $cartoon-border;
+        box-shadow: $cartoon-shadow;
+        min-height: 400px;
+
+        app-lista-zad {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Responsywność dla mobilnych urządzeń
+@media (max-width: 768px) {
+  main {
+    padding: 10px;
+
+    .main-ramka {
+      padding: 20px;
+
+      .parent {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "div1"
+          "div3"
+          "div4";
+        gap: 20px;
+
+        .div1 {
+          justify-content: center;
+
+          .main-tytul {
+            h3 {
+              width: 100%;
+              max-width: 350px;
+              font-size: 1.5em;
+            }
+          }
+        }
+
+        .div3 {
+          justify-content: center;
+        }
+
+        .div4 {
+          padding: 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    .main-ramka {
+      .parent {
+        .div1 {
+          .main-tytul {
+            h3 {
+              font-size: 1.3em;
+              padding: 12px 20px;
+            }
+          }
+        }
+
+        .div3 {
+          .button {
+            padding: 10px 20px;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Dodatkowe style dla komponentu listy zadań (opcjonalne)
+app-lista-zad {
+  // Tutaj możesz dodać style dla komponentu listy zadań
+  // które będą zgodne z kartonowym stylem
+
+  // Przykład dla elementów listy:
+  .task-item {
+    background: $bg-main;
+    border: $cartoon-border;
+    border-radius: 5px;
+    box-shadow: $cartoon-shadow;
+    padding: 15px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: $font-color;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translate(1px, 1px);
+      box-shadow: 3px 3px $main-color;
+    }
+
+    &:active {
+      box-shadow: 0px 0px $main-color;
+      transform: translate(3px, 3px);
+    }
+  }
+
+  .task-button {
+    background-color: $bg-color;
+    color: $font-color;
+    padding: 8px 16px;
+    border: $cartoon-border;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: $cartoon-shadow;
+    margin-right: 10px;
+
+    &.delete {
+      background-color: #ff6b6b;
+      color: $text-color;
+    }
+
+    &.edit {
+      background-color: #4ecdc4;
+      color: $text-color;
+    }
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:active {
+      box-shadow: 0px 0px $main-color;
+      transform: translate(3px, 3px);
+    }
+  }
+}
+
+// Dodatkowe utility classes w kartonowym stylu
+.cartoon-card {
+  background: $bg-color;
+  border: $cartoon-border;
+  border-radius: 5px;
+  box-shadow: $cartoon-shadow;
+  padding: 20px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 3px 3px $main-color;
+  }
+}
+
+.cartoon-button {
+  background-color: $secondary-color;
+  color: $font-color;
+  padding: 10px 20px;
+  border: $cartoon-border;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: $cartoon-shadow;
+
+  &:hover {
+    background-color: darken($secondary-color, 5%);
+  }
+
+  &:active {
+    box-shadow: 0px 0px $main-color;
+    transform: translate(3px, 3px);
+  }
+
+  &.secondary {
+    background-color: $bg-color;
+  }
+
+  &.danger {
+    background-color: #ff6b6b;
+    color: $text-color;
+  }
+}
+
+.cartoon-input {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: $cartoon-border;
+  background-color: $bg-color;
+  box-shadow: $cartoon-shadow;
+  font-size: 15px;
+  font-weight: 600;
+  color: $font-color;
+  padding: 5px 10px;
+  outline: none;
+
+  &::placeholder {
+    color: $font-color-sub;
+    opacity: 0.8;
+  }
+
+  &:focus {
+    border: 2px solid $input-focus;
+  }
+}

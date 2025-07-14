@@ -1,0 +1,21 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+
+$primary-color: #030201;
+$secondary-color: rgba(70, 252, 116, 1);
+$text-color: #ffffff;
+$shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+.manager-zadan-footer {
+  background-color: $primary-color;
+  padding: 1.5rem 0;
+  margin-top: 0;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+  color: $secondary-color;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+}

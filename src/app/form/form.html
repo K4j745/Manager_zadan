@@ -1,0 +1,93 @@
+<form [formGroup]="form" class="form">
+  <div class="title">Dodawanie zadań</div>
+  <div class="row g-3">
+    <!-- Nazwa zadania -->
+    <div>
+      <!--class="col-md-12 form-nazwaZadania">-->
+      <label for="nazwaZadania" class="form-label">Wpisz nazwę zadania</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nazwaZadania"
+        formControlName="nazwaZadania"
+        placeholder="Wpisz nazwę zadania..."
+        required
+      />
+      <www-validate-message
+        [control]="f.nazwaZadania"
+        [visible]="showValidationMessages"
+        fieldName="nazwaZadania"
+        class="invalid-feedback"
+      />
+    </div>
+
+    <!-- Kategoria -->
+    <div>
+      <!--class="col-md-6 form-kategoria">-->
+      <label for="kategoria" class="form-label">Wybierz kategorię</label>
+      <select class="form-select" id="kategoria" formControlName="kategoria">
+        <option value="Praca" selected>Praca</option>
+        <option value="Dom">Dom</option>
+        <option value="Zakupy">Zakupy</option>
+        <option value="Studia">Studia</option>
+      </select>
+      <www-validate-message
+        [control]="f.kategoria"
+        [visible]="showValidationMessages"
+        class="invalid-feedback"
+      />
+    </div>
+
+    <!-- Data -->
+    <div>
+      <!--class="col-md-6 form-data">-->
+      <label for="data" class="form-label">Wybierz datę</label>
+      <input
+        type="date"
+        class="form-control"
+        id="data"
+        formControlName="data"
+      />
+      <www-validate-message
+        [control]="f.data"
+        [visible]="showValidationMessages"
+        class="invalid-feedback"
+      />
+    </div>
+
+    <!-- Priorytet -->
+    <div>
+      <!--class="col-md-12 form-priorytet">-->
+      <label for="priorytet" class="form-label">Określ priorytet</label>
+      <select class="form-select" id="priorytet" formControlName="priorytet">
+        <option value="Niski" disabled selected>Niski</option>
+        <option value="Średni">Średni</option>
+        <option value="Wysoki">Wysoki</option>
+      </select>
+      <www-validate-message
+        [control]="f.priorytet"
+        [visible]="showValidationMessages"
+        class="invalid-feedback"
+      />
+    </div>
+
+    <!-- Przyciski -->
+    <div class="form-przyciski">
+      <!--class="col-12 form-przyciski d-flex justify-content-end gap-2">-->
+      <button
+        type="button"
+        class="button-dismiss"
+        (mousedown)="$event.preventDefault(); onCancel()"
+      >
+        Anuluj
+      </button>
+      <button
+        type="button"
+        class="button-confirm"
+        (click)="onSendApplication()"
+      >
+        Zapisz
+      </button>
+    </div>
+  </div>
+</form>
