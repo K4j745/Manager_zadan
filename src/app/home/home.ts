@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Form } from '../form/form';
-import { TaskList } from '../lista-zad/lista-zad';
+import { ListaZadComponent } from '../lista-zad/lista-zad';
+// import { TaskList } from '../lista-zad/lista-zad';
 
 @Component({
   selector: 'app-home',
-  imports: [Form, TaskList],
+  imports: [Form /*, TaskList*/, ListaZadComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

@@ -4,7 +4,7 @@ $font-color-sub: #666;
 $bg-color: #fff;
 $main-color: #000000;
 $primary-color: #030201;
-$secondary-color: #46fc74;
+$secondary-color: #ffc107; //#ffbf00; //#46fc74;
 $text-color: #ffffff;
 $shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 $shadow-w: 0 4px 6px rgba(255, 255, 255, 0.1);
@@ -93,10 +93,23 @@ $shadow-w: 0 4px 6px rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: space-around;
   }
+  .invalid-feedback {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #dc3545;
+  }
 }
-.invalid-feedback {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-  color: #dc3545;
+
+@media (max-width: 768px) {
+  .invalid-feedback {
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+  }
+}
+@media (max-width: 600px) {
+  .invalid-feedback {
+    margin-top: 0.25rem;
+    font-size: 0.3em;
+  }
 }

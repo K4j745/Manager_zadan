@@ -5,18 +5,26 @@ $font-color-sub: #666;
 $bg-color: #fff;
 $main-color: #000000;
 $primary-color: #030201;
-$secondary-color: #46fc74;
+$secondary-color: #ffc107; //#ffbf00; //#46fc74;
 $text-color: #ffffff;
 $shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 $shadow-w: 0 4px 6px rgba(255, 255, 255, 0.1);
 $bg-main: lightgrey;
+$bg-light: rgb(238, 220, 130);
+$bg-foot: rgb(230, 230, 230);
 
-// Kartonowy cień i obramowanie
+// Cień i obramowanie
 $cartoon-border: 2px solid $main-color;
 $cartoon-shadow: 4px 4px $main-color;
 
 main {
-  background-color: $bg-main;
+  background: #ffbf00;
+  background: radial-gradient(
+    circle,
+    rgba(255, 191, 0, 1) 0%,
+    rgba(255, 227, 142, 1) 53%,
+    rgba(255, 255, 255, 1) 100%
+  );
   min-height: 100vh;
   padding: 20px;
 
@@ -51,7 +59,7 @@ main {
             font-size: 1.8em;
             margin: 0;
             padding: 15px 25px;
-            background: $bg-color;
+            background: #fffdd0;
             border: $cartoon-border;
             border-radius: 25px;
             box-shadow: $cartoon-shadow;
@@ -87,6 +95,8 @@ main {
 
           &:hover {
             background-color: darken($secondary-color, 5%);
+            transform: translate(1px, 1px);
+            box-shadow: 3px 3px $main-color;
           }
 
           &:active {
@@ -98,7 +108,7 @@ main {
 
       .div4 {
         grid-area: div4;
-        background: $bg-color;
+        background: $bg-light;
         padding: 25px;
         border-radius: 5px;
         border: $cartoon-border;
@@ -179,12 +189,9 @@ main {
   }
 }
 
-// Dodatkowe style dla komponentu listy zadań (opcjonalne)
 app-lista-zad {
-  // Tutaj możesz dodać style dla komponentu listy zadań
-  // które będą zgodne z kartonowym stylem
+  // Style dla komponentu listy zadań
 
-  // Przykład dla elementów listy:
   .task-item {
     background: $bg-main;
     border: $cartoon-border;

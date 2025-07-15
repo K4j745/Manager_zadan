@@ -90,10 +90,12 @@ export class Form implements OnInit {
     }
 
     const dto: FormSaveDto = {
+      id: crypto.randomUUID(),
       nazwaZadania: nazwaZadania!,
       kategoria: kategoria!,
       data: data!,
-      priorytet: priorytet!, // 👈 tu rzutowanie typu
+      priorytet: priorytet!,
+      status: false,
     };
     this.taskService.addTask(dto);
     this.sendApplication.emit({
