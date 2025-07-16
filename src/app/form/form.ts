@@ -5,6 +5,7 @@ import {
   Output,
   output,
   EventEmitter,
+  Input,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -35,7 +36,13 @@ export class Form implements OnInit {
     form: FormGroup<FormModel>;
   }>();
 
-  public form!: FormGroup<FormModel>; // użyj ! albo ustaw jako null początkowo
+  public form!: FormGroup<FormModel>;
+
+  // Pobieranie danych do formularza przy edycji
+  @Input() formDataToEdit?: FormSaveDto;
+
+  // Deklaracja do sprawdzenia obecnej daty
+  public minDate!: string;
 
   constructor(
     private readonly _formBuilder: FormBuilder, //private readonly _toastr: ToastrService
@@ -44,12 +51,28 @@ export class Form implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //ustawienie blokady dla kontrolki
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = (today.getMonth() + 1).toString().padStart(2, '0');
+    const dd = today.getDate().toString().padStart(2, '0');
+    this.minDate = `${yyyy}-${mm}-${dd}`;
+
     this.form = this._formBuilder.group<FormModel>({
       nazwaZadania: new FormControl<string | null>(null, [Validators.required]),
       kategoria: new FormControl<Kategoria | null>(null, [Validators.required]),
       data: new FormControl<Date | null>(null, [Validators.required]),
       priorytet: new FormControl<Priorytet | null>(null, [Validators.required]),
     });
+    if (this.formDataToEdit) {
+      this.form.patchValue({
+        nazwaZadania: this.formDataToEdit.nazwaZadania,
+        kategoria: this.formDataToEdit.kategoria,
+        data: this.formDataToEdit.data,
+        priorytet: this.formDataToEdit.priorytet,
+      });
+    }
+    console.log('Odebrano do edycji:', this.formDataToEdit);
   }
   get f() {
     return this.form.controls;
@@ -72,17 +95,17 @@ export class Form implements OnInit {
     console.warn(this.form.controls);
     //oznaczenie formularza i jego poprzez markAsTouched
     this.form.markAllAsTouched(); //*
-    console.warn(this.form.controls['data'].value);
-    console.warn(this.form.controls['priorytet'].value);
-    console.warn(this.form.controls['kategoria'].value);
-    console.warn(this.form.controls['nazwaZadania'].value);
+    // console.warn(this.form.controls['data'].value);
+    // console.warn(this.form.controls['priorytet'].value);
+    // console.warn(this.form.controls['kategoria'].value);
+    // console.warn(this.form.controls['nazwaZadania'].value);
 
     // Sprawdzenie czy formularz jest invlaid, jeżeli tak to przerywa funkcje
     if (this.form.invalid) {
       //this._toastr.error('Wypełnij wszystkie wymagane pola!', 'Błąd!');
       return;
     }
-    // jeżeli jest w porządku to przypisuje do zmiennej savedto2
+    // jeżeli jest w porządku to przypisuje do zmiennej savedto
     const { nazwaZadania, kategoria, data, priorytet } = this.form.value;
 
     if (!nazwaZadania || !kategoria || !data || !priorytet) {
@@ -90,19 +113,23 @@ export class Form implements OnInit {
     }
 
     const dto: FormSaveDto = {
-      id: crypto.randomUUID(),
+      id: this.formDataToEdit?.id ?? crypto.randomUUID(),
       nazwaZadania: nazwaZadania!,
       kategoria: kategoria!,
       data: data!,
       priorytet: priorytet!,
-      status: false,
+      status: this.formDataToEdit?.status ?? false,
     };
-    this.taskService.addTask(dto);
+    if (this.formDataToEdit) {
+      this.taskService.updateTask(dto); // warunek do edycji
+    } else {
+      this.taskService.addTask(dto);
+    }
     this.sendApplication.emit({
       dto,
       form: this.form,
     });
     console.log(this.activeModal);
-    this.activeModal.close();
+    this.activeModal.close({ dto });
   }
 }

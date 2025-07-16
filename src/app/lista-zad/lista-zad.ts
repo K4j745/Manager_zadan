@@ -4,6 +4,8 @@ import { FormSaveDto } from '../models/form-save-dto';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Observable, Subject, takeUntil, take, map } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Form } from '../form/form';
 
 @Component({
   selector: 'app-lista-zad',
@@ -20,9 +22,16 @@ export class ListaZadComponent implements OnInit, OnDestroy {
   // Subject do zarządzania unsubscribe
   private destroy$ = new Subject<void>();
 
+  //Deklaracja zmiennej komunikatu do edycji
+  public editErrorMessage: string | null = null;
+  public showAlert = false;
+
   private currentTasks: FormSaveDto[] = [];
 
-  constructor(private readonly taskService: TaskService) {}
+  constructor(
+    private readonly taskService: TaskService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.tasks$ = this.taskService.getTasks();
@@ -57,6 +66,7 @@ export class ListaZadComponent implements OnInit, OnDestroy {
     );
 
     if (selectedTaskIds.length === 0) {
+      // alert('Musisz zaznaczyć zadanie/a, żeby zmienić status.'); //fajny alert
       return; // Brak zaznaczonych elementów
     }
 
@@ -75,6 +85,64 @@ export class ListaZadComponent implements OnInit, OnDestroy {
     this.clearSelection();
   }
 
+  editSelected(): void {
+    const selectedTaskIds = Object.keys(this.selectedTasksMap).filter(
+      (id) => this.selectedTasksMap[id]
+    );
+
+    if (selectedTaskIds.length !== 1) {
+      //alert('Zaznacz dokładnie jedno zadanie do edycji.'); //alternatywa alertu
+      this.editErrorMessage = 'Zaznacz dokładnie jedno zadanie do edycji.';
+      this.showAlert = true;
+
+      setTimeout(() => {
+        this.showAlert = false;
+        setTimeout(() => {
+          this.editErrorMessage = null;
+        }, 400);
+      }, 3500);
+
+      return;
+    }
+    this.editErrorMessage = null; // czyszczę zmienną
+
+    const taskToEdit = this.currentTasks.find(
+      (task) => task.id === selectedTaskIds[0]
+    );
+    if (!taskToEdit) return;
+
+    const modalRef = this.modalService.open(Form);
+    modalRef.componentInstance.formDataToEdit = taskToEdit; //To było potrzebne
+    //modalRef.componentInstance.form.patchValue(taskToEdit);
+
+    modalRef.result
+      .then((result) => {
+        if (result?.dto) {
+          const updatedTask: FormSaveDto = {
+            ...result.dto,
+            id: taskToEdit.id,
+            status: taskToEdit.status ?? false,
+          };
+          this.taskService.updateTask(updatedTask);
+          this.clearSelection();
+        }
+      })
+      .catch(() => {
+        // Modal zamknięty bez zapisu
+      });
+    //   //dane do formularza
+    //   modalRef.componentInstance.taskData = taskToEdit;
+
+    //   modalRef.result
+    //     .then((updatedTask: FormSaveDto) => {
+    //       this.taskService.updateTask(updatedTask);
+    //       this.clearSelection();
+    //     })
+    //     .catch(() => {
+    //       // np. kliknięto „Anuluj”
+    //     });
+  }
+
   removeSelected(): void {
     //Czy zaznaczone?
     const selectedTaskIds = Object.keys(this.selectedTasksMap).filter(
@@ -82,6 +150,7 @@ export class ListaZadComponent implements OnInit, OnDestroy {
     );
 
     if (selectedTaskIds.length === 0) {
+      // alert('Musisz zaznaczyć zadanie/a, żeby je usunąć.'); //alternatywa alertu
       return; // Gdy nic nie zaznaczone
     }
 

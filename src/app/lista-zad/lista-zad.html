@@ -20,7 +20,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let task of tasks$ | async; let i = index">
+      <tr
+        *ngFor="let task of tasks$ | async; let i = index"
+        class="list-table-row"
+      >
         <td>{{ i + 1 }}</td>
         <td>{{ task.nazwaZadania }}</td>
         <td>{{ task.kategoria }}</td>
@@ -58,11 +61,25 @@
     </tbody>
   </table>
 
+  <div
+    *ngIf="editErrorMessage"
+    role="alert"
+    class="list-alert-edit fade-out-alert-edit"
+  >
+    <!-- <i class="fas fa-exclamation-triangle me-2"></i> -->
+    <div
+      class="list-alert-edit-container"
+      [ngClass]="{ 'fade-out-alert': !showAlert }"
+    >
+      <div class="list-alert-edit-container-text">{{ editErrorMessage }}</div>
+    </div>
+  </div>
   <div class="list-buttons">
     <button class="list-buttons-finished" (click)="markSelectedAsCompleted()">
       Ukończ
     </button>
     <button class="list-buttons-delete" (click)="removeSelected()">Usuń</button>
+    <button class="list-buttons-edit" (click)="editSelected()">Edytuj</button>
   </div>
 </ng-container>
 

@@ -47,6 +47,7 @@
         class="form-control"
         id="data"
         formControlName="data"
+        [min]="minDate"
       />
       <www-validate-message
         [control]="f.data"

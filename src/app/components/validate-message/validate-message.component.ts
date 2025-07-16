@@ -15,6 +15,7 @@ function validatorErrorMessage(
     [key: string]: string;
   } = {
     // todo translate
+    tooEarly: 'Data nie może być wcześniejsza niż dzisiejsza.',
     nazwaZadania: 'Musisz wpisać nazwę zadania.',
     kategoria: 'Musisz wybrać kategorię.',
     data: 'Musisz wybrać datę.',
