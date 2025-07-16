@@ -4,12 +4,6 @@
   <table class="list-table">
     <thead class="list-table-thead">
       <tr>
-        <th>#</th>
-        <th>Zadanie</th>
-        <th>Kategoria</th>
-        <th>Data</th>
-        <th>Priorytet</th>
-        <th>Status</th>
         <th>
           <input
             type="checkbox"
@@ -17,6 +11,12 @@
             (change)="toggleSelectAll($event)"
           />
         </th>
+        <th>#</th>
+        <th>Zadanie</th>
+        <th>Kategoria</th>
+        <th>Data</th>
+        <th>Priorytet</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +24,13 @@
         *ngFor="let task of tasks$ | async; let i = index"
         class="list-table-row"
       >
+        <td>
+          <input
+            type="checkbox"
+            [(ngModel)]="selectedTasksMap[task.id]"
+            name="checkbox-{{ task.id }}"
+          />
+        </td>
         <td>{{ i + 1 }}</td>
         <td>{{ task.nazwaZadania }}</td>
         <td>{{ task.kategoria }}</td>
@@ -49,13 +56,6 @@
           >
             {{ task.status ? "Ukończone" : "Nieukończone" }}
           </span>
-        </td>
-        <td>
-          <input
-            type="checkbox"
-            [(ngModel)]="selectedTasksMap[task.id]"
-            name="checkbox-{{ task.id }}"
-          />
         </td>
       </tr>
     </tbody>
