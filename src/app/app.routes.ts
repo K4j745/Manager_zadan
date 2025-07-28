@@ -1,20 +1,28 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+// src/app/app.routes.ts
+
+import { Routes } from '@angular/router';
 import { Form } from './form/form';
 
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: '/manager-zadan',
     pathMatch: 'full',
+  },
+  {
+    path: 'form',
+    component: Form,
+  },
+  {
+    path: 'learn',
+    loadComponent: () => {
+      return import('./learn/learn').then((m) => m.Learn);
+    },
+  },
+  {
+    path: 'manager-zadan',
     loadComponent: () => {
       return import('./home/home').then((m) => m.Home);
     },
   },
-  { path: 'form', component: Form },
-  //   { path: '', redirectTo: '/form', pathMatch: 'full' },
 ];
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

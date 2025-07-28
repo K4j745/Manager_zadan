@@ -10,7 +10,7 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Home, Footer],
+  imports: [RouterOutlet, Header, Footer],
   template: `
     <app-header />
     <router-outlet></router-outlet>
@@ -23,5 +23,7 @@ export class App {
 }
 
 bootstrapApplication(App, {
-  providers: [provideNoopAnimations() /*provideToastr(), provideAnimations()*/],
+  providers: [
+    /* provideNoopAnimations()*/ /*provideToastr(), provideAnimations()*/ provideAnimations(),
+  ],
 });

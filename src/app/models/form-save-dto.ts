@@ -1,10 +1,10 @@
 import { Priorytet, Kategoria } from './form-enum';
 
 export interface FormSaveDto {
-  //id: string;
+  id: string;
   nazwaZadania: string;
   kategoria: Kategoria;
   data: Date;
   priorytet: Priorytet;
-  //status: string;
+  status?: boolean;
 }
