@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { provideRouter, RouterOutlet } from '@angular/router';
 import { Header } from './components/header/header';
 import { Home } from './home/home';
 import { Footer } from './components/footer/footer';
@@ -7,6 +7,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
+import { routes } from './app.routes';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,8 @@ export class App {
 
 bootstrapApplication(App, {
   providers: [
-    /* provideNoopAnimations()*/ /*provideToastr(), provideAnimations()*/ provideAnimations(),
+    /* provideNoopAnimations()*/ /*provideToastr(), provideAnimations()*/
+    // provideRouter(routes),
+    provideAnimations(),
   ],
 });

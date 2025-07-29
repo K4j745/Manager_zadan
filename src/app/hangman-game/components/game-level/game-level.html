@@ -1,0 +1,103 @@
+<div class="game-info">
+  <h3>Level {{ level }} / 5</h3>
+  <p>Remaining tries: {{ 6 - wrongGuesses }}</p>
+</div>
+<div id="hangman">
+  <svg
+    width="200"
+    height="250"
+    viewBox="0 0 200 250"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <!-- Szubienica -->
+    <line x1="20" y1="230" x2="180" y2="230" stroke="#444" stroke-width="4" />
+    <line x1="50" y1="230" x2="50" y2="20" stroke="#444" stroke-width="4" />
+    <line x1="50" y1="20" x2="120" y2="20" stroke="#444" stroke-width="4" />
+    <line x1="120" y1="20" x2="120" y2="50" stroke="#444" stroke-width="4" />
+
+    <!-- Postać -->
+    <g *ngIf="wrongGuesses > 0" id="head">
+      <circle
+        cx="120"
+        cy="70"
+        r="20"
+        stroke="#000"
+        stroke-width="3"
+        fill="none"
+      />
+    </g>
+    <g *ngIf="wrongGuesses > 1" id="torso">
+      <line x1="120" y1="90" x2="120" y2="150" stroke="#000" stroke-width="3" />
+    </g>
+    <g *ngIf="wrongGuesses > 2" id="arm-right">
+      <line
+        x1="120"
+        y1="100"
+        x2="100"
+        y2="130"
+        stroke="#000"
+        stroke-width="3"
+      />
+    </g>
+    <g *ngIf="wrongGuesses > 3" id="arm-left">
+      <line
+        x1="120"
+        y1="100"
+        x2="140"
+        y2="130"
+        stroke="#000"
+        stroke-width="3"
+      />
+    </g>
+    <g *ngIf="wrongGuesses > 4" id="leg-right">
+      <line
+        x1="120"
+        y1="150"
+        x2="100"
+        y2="190"
+        stroke="#000"
+        stroke-width="3"
+      />
+    </g>
+    <g *ngIf="wrongGuesses > 5" id="leg-left">
+      <line
+        x1="120"
+        y1="150"
+        x2="140"
+        y2="190"
+        stroke="#000"
+        stroke-width="3"
+      />
+    </g>
+  </svg>
+  <!-- <button mat-raised-button (click)="increaseWrongGuess()">Zwiększ</button> -->
+  <!-- <button mat-raised-button (click)="openModal()">Zwiększ</button> -->
+  <button mat-raised-button routerLink="/game-over">Zwiększ</button>
+</div>
+<!-- Word Display Panel -->
+<div class="word-display">
+  <h2>{{ displayWord }}</h2>
+  <p>Guess the word!</p>
+</div>
+<div class="keyboard">
+  <div
+    class="keyboard-row"
+    *ngFor="
+      let row of [
+        alphabet.slice(0, 10),
+        alphabet.slice(10, 19),
+        alphabet.slice(19, 26)
+      ]
+    "
+  >
+    <button
+      *ngFor="let letter of row"
+      mat-raised-button
+      [class.used]="isLetterGuessed(letter)"
+      [disabled]="isLetterGuessed(letter)"
+      (click)="onLetterClick(letter)"
+    >
+      {{ letter }}
+    </button>
+  </div>
+</div>

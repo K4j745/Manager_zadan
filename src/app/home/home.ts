@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Form } from '../form/form';
 import { ListaZadComponent } from '../components/lista-zad/lista-zad';
-import { Testy } from '../testy/testy';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';

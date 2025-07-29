@@ -33,7 +33,9 @@ main {
   align-items: center;
   justify-content: center;
 }
-
+.restart-icon {
+  color: var(--mat-sys-primary);
+}
 mat-card.card {
   width: 100%;
   max-width: 900px;
@@ -182,7 +184,8 @@ mat-progress-bar {
 }
 
 .card-preview {
-  background: #fff;
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-primary-on-container);
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
   padding: 0.5rem 0.25rem;
