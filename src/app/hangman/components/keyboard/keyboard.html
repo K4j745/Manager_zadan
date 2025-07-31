@@ -1,0 +1,15 @@
+<div class="souls-container">
+  <div class="keyboard">
+    <div class="keyboard-row" *ngFor="let row of keyboardLayout">
+      <button
+        *ngFor="let letter of row"
+        class="key"
+        [class.used]="isLetterUsed(letter)"
+        [disabled]="isLetterUsed(letter)"
+        (click)="selectLetter(letter)"
+      >
+        {{ letter }}
+      </button>
+    </div>
+  </div>
+</div>

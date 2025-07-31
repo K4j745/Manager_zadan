@@ -1,0 +1,37 @@
+<div class="souls-container souls-container--important">
+  <div class="stat-item">
+    <div class="stat-icon">
+      <img src="assets\images\Para_str_large.webp" />
+    </div>
+    <div class="stat-content">
+      <div class="stat-label">Poziom</div>
+      <div class="stat-value">{{ level }}/5</div>
+    </div>
+  </div>
+
+  <div class="stat-item">
+    <div class="stat-icon"><img src="assets\images\Para_vit_large.webp" /></div>
+    <div class="stat-content">
+      <div class="stat-label">Pozostałe próby</div>
+      <div class="stat-value">{{ remainingTries }}/{{ maxTries }}</div>
+    </div>
+  </div>
+
+  <div class="stat-item">
+    <div class="stat-icon">
+      <img src="assets\images\ds3_status_red_eye.png" />
+    </div>
+    <div class="stat-content">
+      <div class="stat-label">Czas</div>
+      <div class="stat-value">{{ formatTime(elapsedTime) }}</div>
+    </div>
+  </div>
+
+  <div class="tries-indicator">
+    <div
+      *ngFor="let try of getTriesArray(); let i = index"
+      class="try-dot"
+      [class.used]="i >= remainingTries"
+    ></div>
+  </div>
+</div>

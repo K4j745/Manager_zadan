@@ -20,17 +20,15 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'game-over',
+    path: 'hangman-game/game-over',
     loadComponent: () => {
-      return import('./hangman-game/components/game-over/game-over').then(
-        (m) => m.GameOver
-      );
+      return import('./game-over/game-over').then((m) => m.GameOver);
     },
   },
   {
     path: 'hangman-game',
     loadComponent: () => {
-      return import('./hangman-game/hangman-game').then((m) => m.HangmanGame);
+      return import('./hangman/hangman').then((m) => m.Hangman);
     },
   },
   {

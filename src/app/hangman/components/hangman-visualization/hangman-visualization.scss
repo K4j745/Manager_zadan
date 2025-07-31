@@ -1,0 +1,153 @@
+// _souls-hangman.scss
+.hangman-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 10, 5, 0.7) 0%,
+    rgba(40, 20, 10, 0.6) 100%
+  );
+  border-radius: 12px;
+  padding: 2rem;
+  border: 2px solid #704214;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 0, 0, 0.4);
+  position: relative;
+  margin: 2rem 0;
+
+  // Ancient stone border
+  &::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 1px solid transparent;
+    border-image: linear-gradient(
+        to bottom right,
+        transparent 10%,
+        #d4af37 50%,
+        transparent 90%
+      )
+      1;
+    border-radius: 14px;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+svg {
+  width: 200px;
+  height: 250px;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
+
+  // Gallows structure
+  rect {
+    fill: #704214;
+    stroke: #d4af37;
+    stroke-width: 1;
+    opacity: 0.8;
+  }
+
+  // Hangman parts
+  .hangman-part {
+    stroke: #d10000;
+    stroke-width: 3;
+    stroke-linecap: round;
+    fill: none;
+    animation: soulsDrawPart 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  // Head has special treatment
+  circle.hangman-part {
+    stroke-width: 4;
+    stroke-dasharray: 100;
+  }
+}
+
+.attempts-counter {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-family: "adobe-garamond-pro", serif;
+  color: #d4af37;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+  padding: 0.5rem 1rem;
+  background: rgba(20, 10, 5, 0.5);
+  border-radius: 6px;
+  border: 1px solid #704214;
+
+  p {
+    font-family: "adobe-garamond-pro", serif !important;
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+
+    // Blood splatter effect when attempts increase
+    &.warning {
+      color: #d10000;
+      animation: soulsPulseWarning 0.5s ease 3;
+    }
+  }
+
+  // Blood droplet decoration
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: #d10000;
+    border-radius: 50% 50% 0 50%;
+    transform: translateX(-50%) rotate(-45deg);
+    opacity: 0.7;
+    filter: drop-shadow(0 0 4px #d10000);
+  }
+}
+
+@keyframes soulsDrawPart {
+  0% {
+    opacity: 0;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    filter: drop-shadow(0 0 10px #d10000);
+  }
+  70% {
+    filter: drop-shadow(0 0 15px #d10000);
+  }
+  100% {
+    opacity: 1;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 0 5px rgba(209, 0, 0, 0.5));
+  }
+}
+
+@keyframes soulsPulseWarning {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .hangman-container {
+    padding: 1.5rem;
+  }
+
+  svg {
+    width: 150px;
+    height: 200px;
+  }
+
+  .attempts-counter p {
+    font-size: 1rem;
+  }
+}

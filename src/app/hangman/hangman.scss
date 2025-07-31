@@ -1,0 +1,286 @@
+@import url("https://use.typekit.net/blh4xlf.css");
+
+.hangman-container {
+  min-height: 100vh;
+  background-image: url("/assets/images/souls-background.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 20px;
+  font-family: "adobe-garamond-pro", serif !important;
+  margin: 0;
+  box-sizing: border-box;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.souls-container {
+  margin-top: 1.4em;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: "adobe-garamond-pro", serif !important;
+  width: max-content;
+
+  h1 {
+    img {
+      height: 50px;
+    }
+    //background: rgba(0, 0, 0, 0.5);
+    padding: 10px 0;
+    margin: 0;
+    //backdrop-filter: blur(5px);
+    font-family: "adobe-garamond-pro", serif !important;
+    //color: white;
+    //color: #d4af37;
+    font-size: 2.8rem;
+    //opacity: 0.7;
+    //text-shadow: 1px 1px 3px #d4af37; //#704214
+  }
+}
+
+.menu-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+
+  .souls-container {
+    // background: white;
+    padding: 50px;
+    //border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+
+    h2 {
+      //color: #333;
+      font-family: "adobe-garamond-pro", serif !important;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    p {
+      // color: #666;
+      font-family: "adobe-garamond-pro", serif !important;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .souls-btn {
+      height: 60px;
+      padding: 15px 40px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  }
+}
+
+.game-screen {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  margin-top: 30px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.game-left {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.game-right {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.level-completed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+
+  .souls-container {
+    //background: white;
+    font-family: "adobe-garamond-pro", serif !important;
+    padding: 40px;
+    //border-radius: 20px;
+    text-align: center;
+    //box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+
+    h2 {
+      //color: #27ae60;
+      font-family: "adobe-garamond-pro", serif !important;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    p {
+      font-family: "adobe-garamond-pro", serif !important;
+      //color: #333;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+
+      strong {
+        font-family: "adobe-garamond-pro", serif !important;
+        color: #f05050;
+        font-size: 1.3rem;
+      }
+    }
+
+    .souls-btn {
+      //background: linear-gradient(45deg, #27ae60, #2ecc71);
+      // color: white;
+      // border: none;
+      padding: 11px 30px;
+      // font-size: 1.2rem;
+      // border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+  }
+}
+
+// Mobile responsiveness - the key fix for the gap
+@media (max-width: 1025px) {
+  .hangman-container {
+    // Switch to scroll attachment for better mobile performance
+    background-attachment: scroll;
+
+    // Force the container to start from absolute top of viewport
+    position: relative;
+    top: 0;
+    margin-top: -20px !important;
+    padding-top: 20px !important;
+
+    // Ensure full coverage without gaps
+    min-height: calc(100vh + 20px);
+
+    // Adjust padding
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+  }
+
+  .game-header {
+    // Remove any top margins that could create gaps
+    margin-top: 0 !important;
+    margin-bottom: 20px;
+    padding-top: 0 !important;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 0;
+    }
+  }
+
+  .menu-screen {
+    min-height: calc(100vh - 100px);
+
+    .menu-content {
+      padding: 30px;
+      margin: 0 10px;
+    }
+  }
+
+  .level-completed {
+    min-height: calc(100vh - 100px);
+
+    .level-completed-content {
+      padding: 30px;
+      margin: 0 10px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hangman-container {
+    padding: 10px;
+    // Ensure background starts from absolute top
+    background-position: center top;
+  }
+
+  .game-header {
+    margin-bottom: 15px;
+    margin-top: 0 !important;
+
+    h1 {
+      font-size: 2rem;
+      margin-top: 0;
+    }
+  }
+
+  .menu-screen {
+    min-height: calc(100vh - 80px);
+
+    .menu-content {
+      padding: 25px;
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .start-btn {
+        font-size: 1.2rem;
+        padding: 12px 30px;
+      }
+    }
+  }
+
+  .level-completed {
+    min-height: calc(100vh - 80px);
+
+    .level-completed-content {
+      padding: 25px;
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .next-btn {
+        font-size: 1rem;
+        padding: 12px 25px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .hangman-container {
+    padding: 5px;
+  }
+
+  .game-header {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .menu-content,
+  .level-completed-content {
+    padding: 20px !important;
+
+    h2 {
+      font-size: 1.3rem !important;
+    }
+  }
+}

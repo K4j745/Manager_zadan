@@ -1,0 +1,11 @@
+<div class="word-display">
+  <div class="word-container">
+    <div
+      *ngFor="let letter of getDisplayLetters(); trackBy: trackByIndex"
+      class="letter-box"
+      [class.revealed]="letter !== '_'"
+    >
+      {{ letter }}
+    </div>
+  </div>
+</div>

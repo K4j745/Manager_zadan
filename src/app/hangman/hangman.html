@@ -1,0 +1,79 @@
+<div class="hangman-container">
+  <div class="souls-container">
+    <h1><img src="assets/images/image.png" alt="Hangman" /> Hangman Game</h1>
+  </div>
+
+  <!-- Menu Screen -->
+  <div *ngIf="gameState.gameStatus === 'menu'" class="menu-screen">
+    <div class="souls-container">
+      <div class="souls-container__header"><h2>Witaj w grze Wisielec!</h2></div>
+      <p>Odgadnij 5 słów, aby wygrać grę.</p>
+      <p>Masz 6 prób na każde słowo.</p>
+      <button class="souls-btn" (click)="startGame()">START</button>
+      <!-- <button class="souls-btn" (click)="setGameEnd()">win</button> -->
+    </div>
+  </div>
+
+  <!-- Game Playing Screen -->
+  <div *ngIf="gameState.gameStatus === 'playing'" class="game-screen">
+    <app-game-stats
+      [level]="gameState.currentLevel.level"
+      [remainingTries]="gameState.remainingTries"
+      [maxTries]="gameState.maxTries"
+      [elapsedTime]="gameState.elapsedTime"
+    >
+    </app-game-stats>
+
+    <div class="game-board">
+      <div class="game-left">
+        <app-word-display
+          [targetWord]="gameState.currentLevel.targetWord"
+          [guessedLetters]="getGuessedLetters()"
+        >
+        </app-word-display>
+
+        <app-keyboard
+          [usedLetters]="getUsedLetters()"
+          (letterSelected)="onLetterSelected($event)"
+        >
+        </app-keyboard>
+      </div>
+
+      <div class="game-right">
+        <app-hangman-visualization [wrongAttempts]="getWrongAttempts()">
+        </app-hangman-visualization>
+      </div>
+    </div>
+  </div>
+
+  <!-- Level Completed Screen -->
+  <div
+    *ngIf="gameState.gameStatus === 'levelCompleted'"
+    class="level-completed"
+  >
+    <div class="souls-container">
+      <div class="souls-container__header">
+        <h2>
+          <img src="assets\images\Para_faith_large.webp" /> Poziom
+          {{ gameState.currentLevel.level }} ukończony!
+        </h2>
+      </div>
+      <p>
+        Słowo: <strong>{{ gameState.currentLevel.targetWord }}</strong>
+      </p>
+      <p>
+        Pozostało poziomów:
+        {{ gameState.maxLevels - gameState.completedLevels }}
+      </p>
+      <button class="souls-btn" (click)="nextLevel()">Następny poziom</button>
+    </div>
+  </div>
+
+  <!-- Win Modal -->
+  <app-win-modal
+    *ngIf="gameState.gameStatus === 'gameWon'"
+    [elapsedTime]="gameState.elapsedTime"
+    (playAgain)="playAgain()"
+  >
+  </app-win-modal>
+</div>

@@ -1,0 +1,91 @@
+<div class="hangman-container">
+  <svg width="200" height="250" viewBox="0 0 200 250">
+    <!-- Base -->
+    <rect x="10" y="230" width="100" height="10" fill="white" opacity="1" />
+
+    <!-- Pole -->
+    <rect x="30" y="20" width="5" height="220" fill="white" opacity="1" />
+
+    <!-- Top beam -->
+    <rect x="30" y="20" width="80" height="5" fill="white" opacity="1" />
+
+    <!-- Noose -->
+    <rect x="105" y="20" width="3" height="30" fill="white" opacity="1" />
+
+    <!-- Head -->
+    <circle
+      *ngIf="wrongAttempts >= 1"
+      cx="107"
+      cy="65"
+      r="15"
+      fill="none"
+      stroke="white"
+      stroke-width="3"
+      class="hangman-part"
+    />
+
+    <!-- Body -->
+    <line
+      *ngIf="wrongAttempts >= 2"
+      x1="107"
+      y1="80"
+      x2="107"
+      y2="150"
+      stroke="white"
+      stroke-width="3"
+      class="hangman-part"
+    />
+
+    <!-- Left arm -->
+    <line
+      *ngIf="wrongAttempts >= 3"
+      x1="107"
+      y1="100"
+      x2="80"
+      y2="120"
+      stroke="white"
+      stroke-width="3"
+      class="hangman-part"
+    />
+
+    <!-- Right arm -->
+    <line
+      *ngIf="wrongAttempts >= 4"
+      x1="107"
+      y1="100"
+      x2="134"
+      y2="120"
+      stroke="white"
+      stroke-width="3"
+      class="hangman-part"
+    />
+
+    <!-- Left leg -->
+    <line
+      *ngIf="wrongAttempts >= 5"
+      x1="107"
+      y1="150"
+      x2="85"
+      y2="185"
+      stroke="white"
+      stroke-width="3"
+      class="hangman-part"
+    />
+
+    <!-- Right leg -->
+    <line
+      *ngIf="wrongAttempts >= 6"
+      x1="107"
+      y1="150"
+      x2="129"
+      y2="185"
+      stroke="white"
+      stroke-width="3"
+      class="hangman-part"
+    />
+  </svg>
+
+  <div class="attempts-counter">
+    <p>Błędne próby: {{ wrongAttempts }}/6</p>
+  </div>
+</div>

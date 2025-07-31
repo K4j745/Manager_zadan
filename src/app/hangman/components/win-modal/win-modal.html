@@ -1,0 +1,29 @@
+<div class="modal-overlay" (click)="onOverlayClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="celebration-header">
+      <div class="trophy">
+        <img src="assets\images\bonfire_1.png" alt="Trophy" />
+      </div>
+      <h2>Gratulacje!</h2>
+    </div>
+
+    <div class="win-message">
+      <p>Ukończyłeś wszystkie 5 poziomów!</p>
+      <div class="time-result">
+        <span class="time-label">Twój czas:</span>
+        <span class="time-value">{{ formatTime(elapsedTime) }}</span>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="play-again-btn" (click)="onPlayAgain()">
+        <img src="assets\images\fire.png" /> Zagraj ponownie
+      </button>
+    </div>
+
+    <div class="souls-celebration">
+      <div class="soul-particle" *ngFor="let particle of soulParticles"></div>
+      <div class="bonfire-spark" *ngFor="let spark of bonfireSparks"></div>
+    </div>
+  </div>
+</div>

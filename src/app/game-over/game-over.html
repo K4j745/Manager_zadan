@@ -1,0 +1,15 @@
+<main>
+  <div class="game-over-overlay">
+    <div class="black-bar-container">
+      <div class="black-bar"></div>
+    </div>
+    <div class="game-over-content">
+      <div class="game-over-text">YOU DIED</div>
+      <span>
+        <p>Poprawne hasło:</p>
+        <p class="word-value">{{ correctWord }}</p>
+      </span>
+    </div>
+    <button class="reset-btn" (click)="resetGame()">Spróbuj ponownie</button>
+  </div>
+</main>
