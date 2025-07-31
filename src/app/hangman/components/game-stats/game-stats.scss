@@ -5,17 +5,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  //background: rgba(255, 255, 255, 0.1);
   padding: 20px;
-  //border-radius: 15px;
   backdrop-filter: blur(10px);
-  //border: 2px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 20px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 15px;
-  }
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .stat-item {
@@ -23,10 +17,17 @@
   align-items: center;
   gap: 12px;
   color: white;
+  flex-shrink: 0;
 
   .stat-icon {
     font-size: 2rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+    img {
+      width: auto;
+      height: 2rem;
+      max-width: 100%;
+    }
   }
 
   .stat-content {
@@ -37,7 +38,8 @@
       font-size: 0.9rem;
       opacity: 0.8;
       margin-bottom: 2px;
-      color: #d4af37; //#c0a080
+      color: #d4af37;
+      white-space: nowrap;
     }
 
     .stat-value {
@@ -46,15 +48,7 @@
       font-size: 1.4rem;
       font-weight: bold;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    }
-  }
-
-  @media (max-width: 768px) {
-    justify-content: center;
-    text-align: center;
-
-    .stat-content {
-      text-align: center;
+      white-space: nowrap;
     }
   }
 }
@@ -68,6 +62,7 @@
   border-radius: 20px;
   border: 1px solid #704214;
   box-shadow: inset 0 0 10px rgba(50, 20, 0, 0.5), 0 0 5px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
 
   .try-dot {
     width: 18px;
@@ -84,6 +79,7 @@
       inset 0 0 4px rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
 
     // Inner glow effect
     &::before {
@@ -129,17 +125,6 @@
       opacity: 1;
     }
   }
-
-  @media (max-width: 768px) {
-    justify-content: center;
-    gap: 10px;
-    padding: 6px 10px;
-
-    .try-dot {
-      width: 16px;
-      height: 16px;
-    }
-  }
 }
 
 @keyframes loseLife {
@@ -154,5 +139,203 @@
   100% {
     transform: scale(1);
     background: #e74c3c;
+  }
+}
+
+// Enhanced mobile responsiveness
+@media (max-width: 1024px) {
+  .souls-container {
+    padding: 15px;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .stat-item {
+    gap: 10px;
+
+    .stat-icon {
+      font-size: 1.8rem;
+
+      img {
+        height: 1.8rem;
+      }
+    }
+
+    .stat-content {
+      .stat-value {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  .tries-indicator {
+    gap: 10px;
+    padding: 6px 10px;
+
+    .try-dot {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .souls-container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 10px;
+  }
+
+  .stat-item {
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+
+    .stat-icon {
+      font-size: 1.6rem;
+
+      img {
+        height: 1.6rem;
+      }
+    }
+
+    .stat-content {
+      text-align: center;
+
+      .stat-label {
+        font-size: 0.8rem;
+      }
+
+      .stat-value {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .tries-indicator {
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 8px;
+
+    .try-dot {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .souls-container {
+    padding: 12px 8px;
+    gap: 12px;
+  }
+
+  .stat-item {
+    .stat-icon {
+      font-size: 1.4rem;
+
+      img {
+        height: 1.4rem;
+      }
+    }
+
+    .stat-content {
+      .stat-label {
+        font-size: 0.75rem;
+      }
+
+      .stat-value {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .tries-indicator {
+    gap: 6px;
+    padding: 5px 7px;
+
+    .try-dot {
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .souls-container {
+    padding: 10px 5px;
+    gap: 10px;
+  }
+
+  .stat-item {
+    gap: 6px;
+
+    .stat-icon {
+      font-size: 1.2rem;
+
+      img {
+        height: 1.2rem;
+      }
+    }
+
+    .stat-content {
+      .stat-label {
+        font-size: 0.7rem;
+      }
+
+      .stat-value {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .tries-indicator {
+    gap: 5px;
+    padding: 4px 6px;
+
+    .try-dot {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .souls-container {
+    padding: 8px 4px;
+    gap: 8px;
+  }
+
+  .stat-item {
+    gap: 5px;
+
+    .stat-icon {
+      font-size: 1rem;
+
+      img {
+        height: 1rem;
+      }
+    }
+
+    .stat-content {
+      .stat-label {
+        font-size: 0.65rem;
+      }
+
+      .stat-value {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .tries-indicator {
+    gap: 4px;
+    padding: 3px 5px;
+
+    .try-dot {
+      width: 8px;
+      height: 8px;
+    }
   }
 }
