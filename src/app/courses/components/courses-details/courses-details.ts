@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { Observable, Subject, combineLatest } from 'rxjs';
-import { takeUntil, switchMap, filter } from 'rxjs/operators';
+import { Observable, Subject, combineLatest, of } from 'rxjs';
+import { takeUntil, switchMap, filter, catchError } from 'rxjs/operators';
 import { Course, Video, PdfDocument } from '../../models/course-interface';
 import { CoursesState } from '../../store/courses.state';
 import { LoadCourseById } from '../../store/courses.actions';
@@ -10,11 +10,11 @@ import { VideoService } from '../../../services/video.service';
 import { PdfService } from '../../../services/pdf.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
+import { DifficultyColorPipe } from '../../pipes/difficulty-color.pipe';
 import { PdfViewer } from '../pdf-viewer/pdf-viewer';
 import { VideoPlayer } from '../video-player/video-player';
-import { DifficultyColorPipe } from '../../pipes/difficulty-color.pipe';
 
 @Component({
   selector: 'app-courses-details',
@@ -24,18 +24,18 @@ import { DifficultyColorPipe } from '../../pipes/difficulty-color.pipe';
   imports: [
     MatChipsModule,
     MatIconModule,
-    MatProgressBar,
+    MatProgressBarModule,
     CommonModule,
     PdfViewer,
     VideoPlayer,
     DifficultyColorPipe,
-  ], // Dodaj potrzebne moduły
+  ],
 })
-export class CourseDetail implements OnInit, OnDestroy {
+export class CoursesDetails implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   activeSection = 'introduction';
 
-  course$!: Observable<Course | null>;
+  course$: Observable<Course | null>;
   videos$ = new Subject<Video[]>();
   pdfs$ = new Subject<PdfDocument[]>();
 
@@ -46,10 +46,6 @@ export class CourseDetail implements OnInit, OnDestroy {
     private videoService: VideoService,
     private pdfService: PdfService
   ) {
-    this.initSelectors();
-  }
-
-  private initSelectors(): void {
     this.course$ = this.store.select(CoursesState.getSelectedCourse);
   }
 
@@ -57,28 +53,37 @@ export class CourseDetail implements OnInit, OnDestroy {
     this.route.params
       .pipe(
         takeUntil(this.destroy$),
+        filter((params) => !!params['id']),
         switchMap((params) => {
           const courseId = params['id'];
           this.store.dispatch(new LoadCourseById(courseId));
+
           return combineLatest([
-            this.videoService.getVideosByCourseId(courseId),
-            this.pdfService.getPdfsByCourseId(courseId),
+            this.videoService
+              .getVideosByCourseId(courseId)
+              .pipe(catchError(() => of([] as Video[]))),
+            this.pdfService
+              .getPdfsByCourseId(courseId)
+              .pipe(catchError(() => of([] as PdfDocument[]))),
           ]);
         })
       )
-      .subscribe(([videos, pdfs]) => {
-        this.videos$.next(videos);
-        this.pdfs$.next(pdfs);
+      .subscribe({
+        next: ([videos, pdfs]) => {
+          this.videos$.next(videos || []);
+          this.pdfs$.next(pdfs || []);
+        },
+        error: (err) => console.error('Error loading course data:', err),
       });
 
     this.route.fragment
       .pipe(
         takeUntil(this.destroy$),
-        filter((fragment) => !!fragment)
+        filter((fragment): fragment is string => !!fragment)
       )
       .subscribe((fragment) => {
-        this.activeSection = fragment!;
-        this.scrollToSection(fragment!);
+        this.activeSection = fragment;
+        this.scrollToSection(fragment);
       });
   }
 
@@ -99,16 +104,14 @@ export class CourseDetail implements OnInit, OnDestroy {
   private scrollToSection(anchor: string): void {
     setTimeout(() => {
       const element = document.getElementById(anchor);
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-      }
+      element?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
     }, 100);
   }
 
   goBack(): void {
-    this.router.navigate(['/kursy']);
+    this.router.navigate(['/courses']);
   }
 }

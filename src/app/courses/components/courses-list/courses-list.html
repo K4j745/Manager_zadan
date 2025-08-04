@@ -4,69 +4,73 @@
 
   <div class="courses-header">
     <h2 class="categories__title">Oferta kursów</h2>
-    <app-courses-filters (filtersChange)="onFiltersChange($event)">
-    </app-courses-filters>
+    <app-courses-filters
+      (filtersChange)="onFiltersChange($event)"
+    ></app-courses-filters>
   </div>
 
-  <div
-    class="courses-content"
-    *ngIf="!(loading$ | async); else loadingTemplate"
-  >
-    <div class="carousel">
-      <div class="carousel__container">
-        <div
-          class="carousel-item"
-          *ngFor="let course of courses$ | async; trackBy: trackByCourseId"
-          appHoverEffect
-          (click)="onCourseClick(course.id)"
-        >
-          <img
-            class="carousel-item__img"
-            [src]="course.imageUrl"
-            [alt]="course.title"
-            loading="lazy"
-          />
+  <ng-container *ngIf="(loading$ | async) === false; else loadingTemplate">
+    <div class="courses-content">
+      <div class="carousel">
+        <div class="carousel__container">
+          <div
+            class="carousel-item"
+            *ngFor="let course of courses$ | async; trackBy: trackByCourseId"
+            appHoverEffect
+            (click)="onCourseClick(course.id)"
+          >
+            <img
+              class="carousel-item__img"
+              [src]="course.imageUrl || 'assets/images/default-course.jpg'"
+              [alt]="course.title"
+              loading="lazy"
+            />
 
-          <div class="carousel-item__details">
-            <div class="controls">
-              <mat-icon class="play-icon">play_circle</mat-icon>
-              <mat-icon class="add-icon">add_circle</mat-icon>
-            </div>
-
-            <div class="course-info">
-              <h5 class="carousel-item__details--title">{{ course.title }}</h5>
-              <h6 class="carousel-item__details--subtitle">
-                {{ course.duration }}
-              </h6>
-
-              <div class="difficulty-badge">
-                <mat-chip
-                  [style.background-color]="course.difficulty | difficultyColor"
-                  [style.color]="'white'"
-                >
-                  {{ course.difficulty | titlecase }}
-                </mat-chip>
+            <div class="carousel-item__details">
+              <div class="controls">
+                <mat-icon class="play-icon">play_circle</mat-icon>
+                <mat-icon class="add-icon">add_circle</mat-icon>
               </div>
 
-              <div class="tags-container">
-                <mat-chip-listbox class="course-tags">
-                  <mat-chip-option
-                    *ngFor="let tag of course.tags.slice(0, 3)"
-                    disabled
+              <div class="course-info">
+                <h5 class="carousel-item__details--title">
+                  {{ course.title }}
+                </h5>
+                <h6 class="carousel-item__details--subtitle">
+                  {{ course.duration }} godzin
+                </h6>
+
+                <div class="difficulty-badge">
+                  <mat-chip
+                    [style.background-color]="
+                      course.difficulty | difficultyColor
+                    "
+                    [style.color]="'white'"
                   >
-                    {{ tag }}
-                  </mat-chip-option>
-                </mat-chip-listbox>
-              </div>
-
-              <div class="course-stats">
-                <div class="rating">
-                  <mat-icon>star</mat-icon>
-                  <span>{{ course.rating }}</span>
+                    {{ course.difficulty | titlecase }}
+                  </mat-chip>
                 </div>
-                <div class="students">
-                  <mat-icon>people</mat-icon>
-                  <span>{{ course.studentsCount }}</span>
+
+                <div class="tags-container">
+                  <mat-chip-listbox class="course-tags">
+                    <mat-chip-option
+                      *ngFor="let tag of course.tags?.slice(0, 3) || []"
+                      disabled
+                    >
+                      {{ tag }}
+                    </mat-chip-option>
+                  </mat-chip-listbox>
+                </div>
+
+                <div class="course-stats">
+                  <div class="rating">
+                    <mat-icon>star</mat-icon>
+                    <span>{{ course.rating || 0 }}</span>
+                  </div>
+                  <div class="students">
+                    <mat-icon>people</mat-icon>
+                    <span>{{ course.studentsCount || 0 }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -74,7 +78,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
   <ng-template #loadingTemplate>
     <div class="loading-container">

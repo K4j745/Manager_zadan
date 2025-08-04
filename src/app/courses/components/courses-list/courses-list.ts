@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { CoursesFilters } from '../courses-filters/courses-filters';
+import { HoverEffectDirective } from '../../directives/hover-effect.directive';
 
 @Component({
   selector: 'app-courses-list',
@@ -20,6 +21,7 @@ import { CoursesFilters } from '../courses-filters/courses-filters';
   standalone: true,
   imports: [
     DifficultyColorPipe,
+    HoverEffectDirective,
     MatProgressBar,
     MatIconModule,
     MatChipsModule,
@@ -57,7 +59,7 @@ export class CoursesList implements OnInit, OnDestroy {
   }
 
   onCourseClick(courseId: string): void {
-    this.router.navigate(['/kursy', courseId]);
+    this.router.navigate(['/courses', courseId]); // Fixed navigation
   }
 
   onFiltersChange(filters: CourseFilters): void {

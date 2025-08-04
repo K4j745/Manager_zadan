@@ -4,10 +4,11 @@ import { Video } from '../../models/course-interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
+import { HoverEffectDirective } from '../../directives/hover-effect.directive';
 
 @Component({
   selector: 'app-video-player',
-  imports: [MatIconModule, MatChipsModule, CommonModule],
+  imports: [MatIconModule, MatChipsModule, CommonModule, HoverEffectDirective],
   templateUrl: './video-player.html',
   styleUrl: './video-player.scss',
 })

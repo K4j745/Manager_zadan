@@ -4,9 +4,19 @@ import { PdfDocument } from '../../models/course-interface';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { HoverEffectDirective } from '../../directives/hover-effect.directive';
 @Component({
   selector: 'app-pdf-viewer',
-  imports: [MatIconModule, NgxExtendedPdfViewerModule, CommonModule],
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    NgxExtendedPdfViewerModule,
+    CommonModule,
+    HoverEffectDirective,
+  ],
   templateUrl: './pdf-viewer.html',
   styleUrl: './pdf-viewer.scss',
 })
