@@ -1,0 +1,94 @@
+{
+  "pdfs": [
+    {
+      "id": "p1",
+      "courseId": "1",
+      "title": "Angular Cheat Sheet",
+      "description": "Przydatne komendy i składnia Angular",
+      "url": "assets/pdfs/angular-cheatsheet.pdf",
+      "pages": 4,
+      "order": 1,
+      "sectionId": "materials"
+    },
+    {
+      "id": "p2",
+      "courseId": "1",
+      "title": "TypeScript Fundamentals",
+      "description": "Podstawy TypeScript dla Angular",
+      "url": "assets/pdfs/typescript-fundamentals.pdf",
+      "pages": 12,
+      "order": 2,
+      "sectionId": "materials"
+    },
+    {
+      "id": "p3",
+      "courseId": "1",
+      "title": "RxJS Operators Guide",
+      "description": "Przewodnik po operatorach RxJS",
+      "url": "assets/pdfs/rxjs-operators.pdf",
+      "pages": 8,
+      "order": 3,
+      "sectionId": "materials"
+    },
+    {
+      "id": "p4",
+      "courseId": "2",
+      "title": "HTML5 Reference",
+      "description": "Kompletna referencia HTML5",
+      "url": "assets/pdfs/html5-reference.pdf",
+      "pages": 15,
+      "order": 1,
+      "sectionId": "html-intro"
+    },
+    {
+      "id": "p5",
+      "courseId": "2",
+      "title": "CSS3 Properties Guide",
+      "description": "Przewodnik po właściwościach CSS3",
+      "url": "assets/pdfs/css3-properties.pdf",
+      "pages": 20,
+      "order": 2,
+      "sectionId": "css-intro"
+    },
+    {
+      "id": "p6",
+      "courseId": "3",
+      "title": "SCSS Functions Reference",
+      "description": "Dokumentacja funkcji SCSS",
+      "url": "assets/pdfs/scss-functions.pdf",
+      "pages": 6,
+      "order": 1,
+      "sectionId": "advanced-features"
+    },
+    {
+      "id": "p7",
+      "courseId": "4",
+      "title": "Bootstrap Components Cheatsheet",
+      "description": "Szybka referencia komponentów Bootstrap",
+      "url": "assets/pdfs/bootstrap-components.pdf",
+      "pages": 10,
+      "order": 1,
+      "sectionId": "components"
+    },
+    {
+      "id": "p8",
+      "courseId": "5",
+      "title": "Material Design Principles",
+      "description": "Zasady Material Design",
+      "url": "assets/pdfs/material-design-principles.pdf",
+      "pages": 25,
+      "order": 1,
+      "sectionId": "material-setup"
+    },
+    {
+      "id": "p9",
+      "courseId": "5",
+      "title": "Angular Material Theming Guide",
+      "description": "Przewodnik po themingu w Material",
+      "url": "assets/pdfs/material-theming.pdf",
+      "pages": 8,
+      "order": 2,
+      "sectionId": "theming"
+    }
+  ]
+}

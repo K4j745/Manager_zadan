@@ -37,4 +37,10 @@ export const routes: Routes = [
       return import('./home/home').then((m) => m.Home);
     },
   },
+  {
+    path: 'courses',
+    loadComponent: () => {
+      return import('./courses/courses').then((m) => m.Courses);
+    },
+  },
 ];

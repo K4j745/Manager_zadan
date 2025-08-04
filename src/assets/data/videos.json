@@ -1,0 +1,84 @@
+{
+  "videos": [
+    {
+      "id": "v1",
+      "courseId": "1",
+      "title": "Wprowadzenie do Angular",
+      "description": "Podstawowe pojęcia i architektura Angular",
+      "url": "https://www.youtube.com/embed/3qBXWUpoPHo",
+      "duration": 1200,
+      "order": 1,
+      "sectionId": "intro"
+    },
+    {
+      "id": "v2",
+      "courseId": "1",
+      "title": "Komponenty w Angular",
+      "description": "Jak tworzyć i używać komponenty",
+      "url": "https://www.youtube.com/embed/23o0evRtrFI",
+      "duration": 1800,
+      "order": 2,
+      "sectionId": "basics"
+    },
+    {
+      "id": "v3",
+      "courseId": "1",
+      "title": "Services i Dependency Injection",
+      "description": "Zaawansowane wzorce w Angular",
+      "url": "https://www.youtube.com/embed/0BikjL858OQ",
+      "duration": 2100,
+      "order": 3,
+      "sectionId": "advanced"
+    },
+    {
+      "id": "v4",
+      "courseId": "2",
+      "title": "HTML5 Semantic Elements",
+      "description": "Nowoczesny HTML5 i semantyka",
+      "url": "https://www.youtube.com/embed/UB1O30fR-EE",
+      "duration": 900,
+      "order": 1,
+      "sectionId": "html-intro"
+    },
+    {
+      "id": "v5",
+      "courseId": "2",
+      "title": "CSS Grid i Flexbox",
+      "description": "Nowoczesne layouty CSS",
+      "url": "https://www.youtube.com/embed/jV8B24rSN5o",
+      "duration": 1500,
+      "order": 2,
+      "sectionId": "css-intro"
+    },
+    {
+      "id": "v6",
+      "courseId": "3",
+      "title": "SCSS Variables i Mixins",
+      "description": "Podstawy SCSS preprocessing",
+      "url": "https://www.youtube.com/embed/Zz6eOVaaelI",
+      "duration": 1100,
+      "order": 1,
+      "sectionId": "scss-basics"
+    },
+    {
+      "id": "v7",
+      "courseId": "4",
+      "title": "Bootstrap Grid System",
+      "description": "Responsywne layouty z Bootstrap",
+      "url": "https://www.youtube.com/embed/qmPmwdshCMw",
+      "duration": 800,
+      "order": 1,
+      "sectionId": "bootstrap-intro"
+    },
+    {
+      "id": "v8",
+      "courseId": "5",
+      "title": "Angular Material Setup",
+      "description": "Konfiguracja Material Design",
+      "url": "https://www.youtube.com/embed/bV8emCBmFHk",
+      "duration": 1000,
+      "order": 1,
+      "sectionId": "material-setup"
+    }
+  ]
+}

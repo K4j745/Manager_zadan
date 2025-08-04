@@ -1,16 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, importProvidersFrom } from '@angular/core';
 import { provideRouter, RouterOutlet } from '@angular/router';
-import { Header } from './components/header/header';
-import { Home } from './home/home';
-import { Footer } from './components/footer/footer';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideToastr } from 'ngx-toastr';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideNoopAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { routes } from './app.routes';
+import { Header } from './components/header/header';
+import { Footer } from './components/footer/footer';
+import { CoursesState } from './courses/store/courses.state';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, Header, Footer],
   template: `
     <app-header />
@@ -20,13 +23,35 @@ import { routes } from './app.routes';
   styles: [],
 })
 export class App {
-  protected title = 'manager-zadan';
+  title = 'manager-zadan';
 }
 
 bootstrapApplication(App, {
   providers: [
-    /* provideNoopAnimations()*/ /*provideToastr(), provideAnimations()*/
-    // provideRouter(routes),
+    // Router
+    provideRouter(routes),
+
+    // HTTP Client
+    provideHttpClient(),
+
+    // Animations
     provideAnimations(),
+
+    // Toastr
+    provideToastr({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+
+    // NGXS
+    importProvidersFrom(
+      NgxsModule.forRoot([CoursesState]),
+      NgxsReduxDevtoolsPluginModule.forRoot({
+        name: 'NGXS Store',
+        disabled: false, // Ustaw na true w produkcji
+        maxAge: 25, // Liczba akcji do zachowania w historii
+      })
+    ),
   ],
-});
+}).catch((err) => console.error(err));

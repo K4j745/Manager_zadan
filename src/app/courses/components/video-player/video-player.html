@@ -1,0 +1,61 @@
+// src/app/courses/components/video-player/video-player.component.html
+<div class="video-player-container" *ngIf="sectionVideos.length > 0">
+  <div class="video-section">
+    <div class="main-video" *ngIf="selectedVideo">
+      <div class="video-header">
+        <h3>{{ selectedVideo.title }}</h3>
+        <div class="video-meta">
+          <mat-chip class="duration-chip">
+            <mat-icon>schedule</mat-icon>
+            {{ formatDuration(selectedVideo.duration) }}
+          </mat-chip>
+        </div>
+      </div>
+
+      <div class="video-wrapper">
+        <iframe
+          [src]="safeVideoUrl"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          class="video-iframe"
+        >
+        </iframe>
+      </div>
+
+      <div class="video-description">
+        <p>{{ selectedVideo.description }}</p>
+      </div>
+    </div>
+
+    <div class="video-playlist">
+      <h4>Lista odcinków</h4>
+      <div class="playlist-container">
+        <div
+          class="playlist-item"
+          *ngFor="let video of sectionVideos; trackBy: trackByVideoId"
+          [class.active]="selectedVideo?.id === video.id"
+          (click)="selectVideo(video)"
+          appHoverEffect
+        >
+          <div class="playlist-item-content">
+            <div class="video-thumbnail">
+              <mat-icon class="play-icon">play_circle_filled</mat-icon>
+              <span class="video-order">{{ video.order }}</span>
+            </div>
+
+            <div class="video-info">
+              <h5 class="video-title">{{ video.title }}</h5>
+              <p class="video-duration">{{ formatDuration(video.duration) }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="no-videos" *ngIf="sectionVideos.length === 0">
+  <mat-icon>video_library</mat-icon>
+  <p>Brak wideo w tej sekcji</p>
+</div>

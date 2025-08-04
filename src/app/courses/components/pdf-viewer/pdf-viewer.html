@@ -1,0 +1,103 @@
+// src/app/courses/components/pdf-viewer/pdf-viewer.component.html
+<div class="pdf-viewer-container" *ngIf="sectionPdfs.length > 0">
+  <div class="pdf-list-section">
+    <h4>Materiały PDF</h4>
+
+    <div class="pdf-grid">
+      <div
+        class="pdf-card"
+        *ngFor="let pdf of sectionPdfs; trackBy: trackByPdfId"
+        appHoverEffect
+      >
+        <div class="pdf-card-header">
+          <div class="pdf-icon">
+            <mat-icon>picture_as_pdf</mat-icon>
+          </div>
+          <div class="pdf-info">
+            <h5 class="pdf-title">{{ pdf.title }}</h5>
+            <p class="pdf-meta">{{ pdf.pages }} stron</p>
+          </div>
+        </div>
+
+        <div class="pdf-description">
+          <p>{{ pdf.description }}</p>
+        </div>
+
+        <div class="pdf-actions">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="selectPdf(pdf)"
+            class="view-button"
+          >
+            <mat-icon>visibility</mat-icon>
+            Podgląd
+          </button>
+
+          <button
+            mat-stroked-button
+            color="accent"
+            (click)="downloadPdf(pdf)"
+            class="download-button"
+          >
+            <mat-icon>download</mat-icon>
+            Pobierz
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PDF Viewer Modal -->
+  <div
+    class="pdf-viewer-modal"
+    *ngIf="showPdfViewer && selectedPdf"
+    (click)="closePdfViewer()"
+  >
+    <div class="pdf-viewer-content" (click)="$event.stopPropagation()">
+      <div class="pdf-viewer-header">
+        <h3>{{ selectedPdf.title }}</h3>
+        <div class="pdf-viewer-actions">
+          <button
+            mat-icon-button
+            (click)="downloadPdf(selectedPdf)"
+            matTooltip="Pobierz PDF"
+          >
+            <mat-icon>download</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="closePdfViewer()"
+            matTooltip="Zamknij"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="pdf-viewer-body">
+        <ngx-extended-pdf-viewer
+          [src]="selectedPdf.url"
+          [height]="'70vh'"
+          [showToolbar]="true"
+          [showSidebarButton]="true"
+          [showFindButton]="true"
+          [showPagingButtons]="true"
+          [showZoomButtons]="true"
+          [showPresentationModeButton]="true"
+          [showOpenFileButton]="false"
+          [showPrintButton]="true"
+          [showDownloadButton]="true"
+          [showSecondaryToolbarButton]="true"
+          [showRotateButton]="true"
+        >
+        </ngx-extended-pdf-viewer>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="no-pdfs" *ngIf="sectionPdfs.length === 0">
+  <mat-icon>library_books</mat-icon>
+  <p>Brak materiałów PDF w tej sekcji</p>
+</div>

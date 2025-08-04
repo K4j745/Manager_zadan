@@ -1,0 +1,78 @@
+<div class="filters-container">
+  <form [formGroup]="filtersForm" class="filters-form">
+    <div class="filters-row">
+      <!-- Search -->
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Szukaj kursów</mat-label>
+        <input
+          matInput
+          formControlName="searchTerm"
+          placeholder="Wpisz tytuł, opis lub tag..."
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <!-- Category Filter -->
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Kategoria</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="">Wszystkie</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ getCategoryLabel(category) }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>category</mat-icon>
+      </mat-form-field>
+
+      <!-- Difficulty Filter -->
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Poziom trudności</mat-label>
+        <mat-select formControlName="difficulty">
+          <mat-option value="">Wszystkie</mat-option>
+          <mat-option
+            *ngFor="let difficulty of difficulties"
+            [value]="difficulty"
+          >
+            {{ getDifficultyLabel(difficulty) }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>assessment</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="filters-row">
+      <!-- Sort By -->
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Sortuj według</mat-label>
+        <mat-select formControlName="sortBy">
+          <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>sort</mat-icon>
+      </mat-form-field>
+
+      <!-- Sort Direction -->
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Kierunek sortowania</mat-label>
+        <mat-select formControlName="sortDirection">
+          <mat-option value="asc">Rosnąco</mat-option>
+          <mat-option value="desc">Malejąco</mat-option>
+        </mat-select>
+        <mat-icon matSuffix>swap_vert</mat-icon>
+      </mat-form-field>
+
+      <!-- Clear Filters Button -->
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="clearFilters()"
+        class="clear-button"
+      >
+        <mat-icon>clear</mat-icon>
+        Wyczyść filtry
+      </button>
+    </div>
+  </form>
+</div>

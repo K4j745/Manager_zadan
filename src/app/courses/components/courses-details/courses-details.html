@@ -1,0 +1,134 @@
+<div class="course-detail-container" *ngIf="course$ | async as course">
+  <!-- Header Navigation -->
+  <div class="course-header">
+    <div class="header-content">
+      <button mat-icon-button (click)="goBack()" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
+      <div class="course-title-section">
+        <h1 class="course-title">{{ course.title }}</h1>
+        <p class="course-subtitle">{{ course.subtitle }}</p>
+      </div>
+    </div>
+
+    <!-- Section Navigation -->
+    <nav class="section-navigation">
+      <div class="nav-container">
+        <button
+          mat-button
+          *ngFor="let section of course.sections"
+          [class.active]="activeSection === section.anchor"
+          (click)="navigateToSection(section.anchor)"
+        >
+          {{ section.title }}
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Course Content -->
+  <div class="course-content">
+    <!-- Introduction Section -->
+    <section id="introduction" class="content-section">
+      <div class="section-header">
+        <h2>{{ course.title }}</h2>
+        <div class="course-meta">
+          <mat-chip
+            [style.background-color]="course.difficulty | difficultyColor"
+            [style.color]="'white'"
+          >
+            {{ course.difficulty | titlecase }}
+          </mat-chip>
+
+          <div class="meta-info">
+            <div class="duration">
+              <mat-icon>schedule</mat-icon>
+              <span>{{ course.duration }}</span>
+            </div>
+            <div class="rating">
+              <mat-icon>star</mat-icon>
+              <span>{{ course.rating }}/5</span>
+            </div>
+            <div class="students">
+              <mat-icon>people</mat-icon>
+              <span>{{ course.studentsCount }} uczniów</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-description">
+        <p [innerHTML]="course.description"></p>
+      </div>
+
+      <div class="course-details">
+        <div class="detail-card">
+          <h3>Kategoria</h3>
+          <mat-chip>{{ course.category | titlecase }}</mat-chip>
+        </div>
+
+        <div class="detail-card">
+          <h3>Instruktor</h3>
+          <p>{{ course.instructor }}</p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Tagi</h3>
+          <mat-chip-listbox class="tags-list">
+            <mat-chip-option *ngFor="let tag of course.tags" disabled>
+              {{ tag }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </div>
+
+        <div class="detail-card">
+          <h3>Data publikacji</h3>
+          <p>{{ course.publishedDate | date : "dd.MM.yyyy" }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Basics Section -->
+    <section id="basics" class="content-section">
+      <div class="section-header">
+        <h2>Podstawy</h2>
+      </div>
+
+      <div class="videos-container">
+        <app-video-player [videos]="videos$ | async" sectionId="basics">
+        </app-video-player>
+      </div>
+    </section>
+
+    <!-- Advanced Section -->
+    <section id="advanced" class="content-section">
+      <div class="section-header">
+        <h2>Zaawansowane tematy</h2>
+      </div>
+
+      <div class="videos-container">
+        <app-video-player [videos]="videos$ | async" sectionId="advanced">
+        </app-video-player>
+      </div>
+    </section>
+
+    <!-- Materials Section -->
+    <section id="materials" class="content-section">
+      <div class="section-header">
+        <h2>Materiały do pobrania</h2>
+      </div>
+
+      <div class="materials-container">
+        <app-pdf-viewer [pdfs]="pdfs$ | async" sectionId="materials">
+        </app-pdf-viewer>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div class="loading-container" *ngIf="!(course$ | async)">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <p>Ładowanie kursu...</p>
+</div>

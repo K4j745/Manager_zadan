@@ -1,0 +1,183 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "title": "Angular",
+      "subtitle": "Complete Angular Development Course",
+      "description": "Kompleksowy kurs Angular, który nauczy Cię wszystkiego, co musisz wiedzieć o tym potężnym frameworku. Kurs obejmuje komponenty, serwisy, routing, formularze i wiele więcej¹.",
+      "shortDescription": "Naucz się Angular od podstaw do zaawansowanych technik",
+      "imageUrl": "assets/images/courses/angular-course.jpg",
+      "duration": "30-40 godzin",
+      "difficulty": "intermediate",
+      "category": "frontend",
+      "tags": ["TypeScript", "SPA", "RxJS", "Material Design"],
+      "publishedDate": "2024-01-15T00:00:00.000Z",
+      "rating": 4.8,
+      "studentsCount": 1250,
+      "instructor": "Jan Kowalski",
+      "sections": [
+        {
+          "id": "intro",
+          "title": "Wprowadzenie",
+          "anchor": "introduction",
+          "order": 1
+        },
+        {
+          "id": "basics",
+          "title": "Podstawy",
+          "anchor": "basics",
+          "order": 2
+        },
+        {
+          "id": "advanced",
+          "title": "Zaawansowane tematy",
+          "anchor": "advanced",
+          "order": 3
+        },
+        {
+          "id": "materials",
+          "title": "Materiały do pobrania",
+          "anchor": "materials",
+          "order": 4
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "HTML/CSS",
+      "subtitle": "Fundamenty Web Development",
+      "description": "Podstawowy kurs HTML i CSS, idealny dla początkujących. Nauczysz się tworzyć responsywne strony internetowe używając najnowszych standardów.",
+      "shortDescription": "Podstawy tworzenia stron internetowych",
+      "imageUrl": "assets/images/courses/html-css-course.jpg",
+      "duration": "12-20 godzin",
+      "difficulty": "beginner",
+      "category": "frontend",
+      "tags": ["HTML5", "CSS3", "Responsive", "Flexbox", "Grid"],
+      "publishedDate": "2024-02-01T00:00:00.000Z",
+      "rating": 4.6,
+      "studentsCount": 2100,
+      "instructor": "Anna Nowak",
+      "sections": [
+        {
+          "id": "html-intro",
+          "title": "HTML Podstawy",
+          "anchor": "html-basics",
+          "order": 1
+        },
+        {
+          "id": "css-intro",
+          "title": "CSS Styling",
+          "anchor": "css-styling",
+          "order": 2
+        },
+        {
+          "id": "responsive",
+          "title": "Responsive Design",
+          "anchor": "responsive",
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "SCSS",
+      "subtitle": "Advanced CSS Preprocessing",
+      "description": "Naucz się wykorzystywać moc SCSS do pisania bardziej efektywnego i maintainable CSS. Kurs obejmuje zmienne, mixiny, funkcje i organizację kodu.",
+      "shortDescription": "Zaawansowane techniki CSS z SCSS",
+      "imageUrl": "assets/images/courses/scss-course.jpg",
+      "duration": "6-10 godzin",
+      "difficulty": "intermediate",
+      "category": "frontend",
+      "tags": ["SCSS", "Sass", "CSS", "Preprocessing", "Mixins"],
+      "publishedDate": "2024-01-20T00:00:00.000Z",
+      "rating": 4.7,
+      "studentsCount": 850,
+      "instructor": "Piotr Wiśniewski",
+      "sections": [
+        {
+          "id": "scss-basics",
+          "title": "SCSS Podstawy",
+          "anchor": "scss-basics",
+          "order": 1
+        },
+        {
+          "id": "advanced-features",
+          "title": "Zaawansowane funkcje",
+          "anchor": "advanced-features",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Bootstrap",
+      "subtitle": "Rapid UI Development",
+      "description": "Szybkie tworzenie responsywnych interfejsów użytkownika z Bootstrap. Poznaj komponenty, system gridów i utility classes.",
+      "shortDescription": "Framework CSS do szybkiego prototypowania",
+      "imageUrl": "assets/images/courses/bootstrap-course.jpg",
+      "duration": "6-8 godzin",
+      "difficulty": "beginner",
+      "category": "frontend",
+      "tags": ["Bootstrap", "CSS Framework", "Responsive", "Components"],
+      "publishedDate": "2024-02-10T00:00:00.000Z",
+      "rating": 4.4,
+      "studentsCount": 1800,
+      "instructor": "Maria Kowalczyk",
+      "sections": [
+        {
+          "id": "bootstrap-intro",
+          "title": "Wprowadzenie do Bootstrap",
+          "anchor": "bootstrap-intro",
+          "order": 1
+        },
+        {
+          "id": "components",
+          "title": "Komponenty Bootstrap",
+          "anchor": "components",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Angular Material",
+      "subtitle": "Material Design for Angular",
+      "description": "Kompleksowy przewodnik po Angular Material. Naucz się implementować Material Design w aplikacjach Angular używając gotowych komponentów.",
+      "shortDescription": "Material Design w Angular",
+      "imageUrl": "assets/images/courses/angular-material-course.jpg",
+      "duration": "8-12 godzin",
+      "difficulty": "intermediate",
+      "category": "frontend",
+      "tags": [
+        "Angular Material",
+        "Material Design",
+        "UI Components",
+        "Theming"
+      ],
+      "publishedDate": "2024-01-25T00:00:00.000Z",
+      "rating": 4.9,
+      "studentsCount": 950,
+      "instructor": "Tomasz Nowicki",
+      "sections": [
+        {
+          "id": "material-setup",
+          "title": "Konfiguracja Material",
+          "anchor": "material-setup",
+          "order": 1
+        },
+        {
+          "id": "material-components",
+          "title": "Komponenty Material",
+          "anchor": "material-components",
+          "order": 2
+        },
+        {
+          "id": "theming",
+          "title": "Theming i customizacja",
+          "anchor": "theming",
+          "order": 3
+        }
+      ]
+    }
+  ]
+}
