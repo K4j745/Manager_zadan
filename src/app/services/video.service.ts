@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Video, VideoData } from '../courses/models/course-interface';
+import { Video } from '../courses/models/course-interface';
+import { VideoData } from '../courses/models/video-interface';
 
 @Injectable({
   providedIn: 'root',

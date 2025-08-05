@@ -73,13 +73,3 @@ export interface CourseFilters {
   sortBy?: 'publishedDate' | 'rating' | 'studentsCount' | 'title';
   sortDirection?: 'asc' | 'desc';
 }
-
-// src/app/courses/models/video.interface.ts
-export interface VideoData {
-  videos: Video[];
-}
-
-// src/app/courses/models/pdf.interface.ts
-export interface PdfData {
-  pdfs: PdfDocument[];
-}

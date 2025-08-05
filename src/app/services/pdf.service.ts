@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PdfDocument, PdfData } from '../courses/models/course-interface';
+import { PdfDocument } from '../courses/models/course-interface';
+import { PdfData } from '../courses/models/pdf-interface';
 
 @Injectable({
   providedIn: 'root',

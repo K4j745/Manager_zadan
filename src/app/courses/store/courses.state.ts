@@ -136,9 +136,10 @@ export class CoursesState {
     return filteredCourses;
   }
 
-  @Selector()
+  @Selector() // Sprawdza, czy stan jest w trakcie ładowania
   static isLoading(state: CoursesStateModel): boolean {
     return state?.loading || false;
+    // return state.loading;
   }
 
   @Selector()
@@ -192,22 +193,37 @@ export class CoursesState {
   @Action(LoadCourseById)
   loadCourseById(ctx: StateContext<CoursesStateModel>, action: LoadCourseById) {
     const state = ctx.getState();
-    const course = (state.courses || []).find((c) => c.id === action.id);
+    const course = state.courses.find((c) => c.id === action.id);
 
+    // Jeśli kurs jest już w stanie
     if (course) {
       ctx.patchState({ selectedCourse: course });
       return of(undefined);
     }
+
+    // Jeśli nie ma - ustaw stan ładowania i pobierz z serwisu
+    ctx.patchState({ loading: true, error: null });
 
     return this.coursesService.getCourseById(action.id).pipe(
       tap((course) => {
         if (!course) {
           throw new Error('Course not found');
         }
-        ctx.patchState({ selectedCourse: course });
+
+        // Aktualizuj listę kursów
+        const updatedCourses = [...state.courses, course];
+
+        ctx.patchState({
+          courses: updatedCourses,
+          selectedCourse: course,
+          loading: false,
+        });
       }),
       catchError((error) => {
-        ctx.patchState({ error: error.message });
+        ctx.patchState({
+          error: error.message,
+          loading: false,
+        });
         return throwError(() => error);
       })
     );

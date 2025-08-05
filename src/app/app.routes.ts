@@ -2,6 +2,7 @@
 
 import { Routes } from '@angular/router';
 import { Form } from './form/form';
+import { CoursesDetails } from './courses/components/courses-details/courses-details';
 
 export const routes: Routes = [
   {
@@ -43,12 +44,16 @@ export const routes: Routes = [
       return import('./courses/courses').then((m) => m.Courses);
     },
   },
+  // {
+  //   path: 'courses/:id',
+  //   loadComponent: () => {
+  //     return import(
+  //       './courses/components/courses-details/courses-details'
+  //     ).then((m) => m.CoursesDetails); // Powinno być: m.CoursesDetails
+  //   },
+  // },
   {
     path: 'courses/:id',
-    loadComponent: () => {
-      return import(
-        './courses/components/courses-details/courses-details'
-      ).then((m) => m.CoursesDetails);
-    },
+    component: CoursesDetails, // Dla standalone components nie trzeba lazy loadować
   },
 ];
