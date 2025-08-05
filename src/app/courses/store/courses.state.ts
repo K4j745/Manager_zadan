@@ -56,8 +56,8 @@ export class CoursesState {
     return (
       state?.filters || {
         searchTerm: '',
-        category: '',
-        difficulty: '',
+        category: undefined,
+        difficulty: undefined,
         tags: [],
         sortBy: 'publishedDate',
         sortDirection: 'desc',
@@ -67,21 +67,30 @@ export class CoursesState {
 
   @Selector()
   static getFilteredCourses(state: CoursesStateModel): Course[] {
-    if (!state?.courses?.length) return [];
+    console.log('[STATE] getFilteredCourses called', state);
+
+    if (!state?.courses?.length) {
+      console.log('[STATE] No courses available');
+      return [];
+    }
 
     const filters = state.filters || {};
     let filteredCourses = [...state.courses];
+
+    console.log('[STATE] Starting with courses:', filteredCourses.length);
 
     if (filters.category) {
       filteredCourses = filteredCourses.filter(
         (course) => course.category === filters.category
       );
+      console.log('[STATE] After category filter:', filteredCourses.length);
     }
 
     if (filters.difficulty) {
       filteredCourses = filteredCourses.filter(
         (course) => course.difficulty === filters.difficulty
       );
+      console.log('[STATE] After difficulty filter:', filteredCourses.length);
     }
 
     if (filters.searchTerm) {
@@ -94,6 +103,7 @@ export class CoursesState {
             tag.toLowerCase().includes(searchTerm)
           )
       );
+      console.log('[STATE] After search filter:', filteredCourses.length);
     }
 
     if (filters.tags?.length) {
@@ -104,6 +114,7 @@ export class CoursesState {
           )
         )
       );
+      console.log('[STATE] After tags filter:', filteredCourses.length);
     }
 
     // Sortowanie
@@ -133,13 +144,15 @@ export class CoursesState {
       });
     }
 
+    console.log('[STATE] Final filtered courses:', filteredCourses.length);
     return filteredCourses;
   }
 
-  @Selector() // Sprawdza, czy stan jest w trakcie ładowania
+  @Selector()
   static isLoading(state: CoursesStateModel): boolean {
-    return state?.loading || false;
-    // return state.loading;
+    const loading = state?.loading || false;
+    console.log('[STATE] isLoading:', loading);
+    return loading;
   }
 
   @Selector()
@@ -149,17 +162,20 @@ export class CoursesState {
 
   @Action(LoadCourses)
   loadCourses(ctx: StateContext<CoursesStateModel>) {
+    console.log('[STATE] LoadCourses action dispatched');
+
     ctx.patchState({
       loading: true,
       error: null,
-      courses: [], // Reset kursów podczas ładowania
     });
 
     return this.coursesService.getCourses().pipe(
       tap((courses) => {
+        console.log('[STATE] Courses loaded from service:', courses);
         ctx.dispatch(new LoadCoursesSuccess(courses || []));
       }),
       catchError((error) => {
+        console.error('[STATE] Error loading courses:', error);
         ctx.dispatch(new LoadCoursesError(error.message || 'Unknown error'));
         return throwError(() => error);
       })
@@ -171,6 +187,12 @@ export class CoursesState {
     ctx: StateContext<CoursesStateModel>,
     action: LoadCoursesSuccess
   ) {
+    console.log(
+      '[STATE] LoadCoursesSuccess:',
+      action.courses.length,
+      'courses'
+    );
+
     ctx.patchState({
       courses: action.courses || [],
       loading: false,
@@ -183,10 +205,12 @@ export class CoursesState {
     ctx: StateContext<CoursesStateModel>,
     action: LoadCoursesError
   ) {
+    console.error('[STATE] LoadCoursesError:', action.error);
+
     ctx.patchState({
       loading: false,
       error: action.error || 'Failed to load courses',
-      courses: [], // Upewnij się, że kursy są puste w przypadku błędu
+      courses: [],
     });
   }
 
@@ -195,13 +219,11 @@ export class CoursesState {
     const state = ctx.getState();
     const course = state.courses.find((c) => c.id === action.id);
 
-    // Jeśli kurs jest już w stanie
     if (course) {
       ctx.patchState({ selectedCourse: course });
       return of(undefined);
     }
 
-    // Jeśli nie ma - ustaw stan ładowania i pobierz z serwisu
     ctx.patchState({ loading: true, error: null });
 
     return this.coursesService.getCourseById(action.id).pipe(
@@ -210,7 +232,6 @@ export class CoursesState {
           throw new Error('Course not found');
         }
 
-        // Aktualizuj listę kursów
         const updatedCourses = [...state.courses, course];
 
         ctx.patchState({
@@ -231,6 +252,8 @@ export class CoursesState {
 
   @Action(SetFilters)
   setFilters(ctx: StateContext<CoursesStateModel>, action: SetFilters) {
+    console.log('[STATE] SetFilters:', action.filters);
+
     ctx.patchState({
       filters: {
         ...ctx.getState().filters,

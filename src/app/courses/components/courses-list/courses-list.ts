@@ -1,8 +1,9 @@
+// src/app/courses/components/courses-list/courses-list.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { Course, CourseFilters } from '../../models/course-interface';
 import { CoursesState } from '../../store/courses.state';
 import { LoadCourses, SetFilters } from '../../store/courses.actions';
@@ -46,11 +47,36 @@ export class CoursesList implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('[COURSES-LIST] Initializing component');
+
+    // Dispatch load courses action
     this.store.dispatch(new LoadCourses());
 
-    this.courses$.pipe(takeUntil(this.destroy$)).subscribe((courses) => {
-      console.log('Loaded courses:', courses);
-    });
+    // Debug loading state
+    this.loading$
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((loading) => console.log('[COURSES-LIST] Loading state:', loading))
+      )
+      .subscribe();
+
+    // Debug courses data
+    this.courses$
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((courses) => console.log('[COURSES-LIST] Courses data:', courses))
+      )
+      .subscribe();
+
+    // Debug filters
+    this.filters$
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((filters) =>
+          console.log('[COURSES-LIST] Current filters:', filters)
+        )
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {
@@ -59,10 +85,12 @@ export class CoursesList implements OnInit, OnDestroy {
   }
 
   onCourseClick(courseId: string): void {
-    this.router.navigate(['/courses', courseId]); // Fixed navigation
+    console.log('[COURSES-LIST] Navigating to course:', courseId);
+    this.router.navigate(['/courses', courseId]);
   }
 
   onFiltersChange(filters: CourseFilters): void {
+    console.log('[COURSES-LIST] Filters changed:', filters);
     this.store.dispatch(new SetFilters(filters));
   }
 
