@@ -56,4 +56,10 @@ export const routes: Routes = [
     path: 'courses/:id',
     component: CoursesDetails, // Dla standalone components nie trzeba lazy loadować
   },
+  {
+    path: 'charts',
+    loadComponent: () => {
+      return import('./charts/charts').then((m) => m.Charts);
+    },
+  },
 ];
