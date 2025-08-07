@@ -1,4 +1,7 @@
-<div class="course-detail-container" *ngIf="course$ | async as course">
+<div
+  class="course-detail-container"
+  *ngIf="course$ | async as course; else loading"
+>
   <!-- Header Navigation -->
   <div class="course-header">
     <div class="header-content">
@@ -13,7 +16,7 @@
     </div>
 
     <!-- Section Navigation -->
-    <nav class="section-navigation">
+    <nav class="section-navigation" *ngIf="course.sections?.length">
       <div class="nav-container">
         <button
           mat-button
@@ -30,7 +33,7 @@
   <!-- Course Content -->
   <div class="course-content">
     <!-- Introduction Section -->
-    <section id="introduction" class="content-section">
+    <section id="introduction" class="content-section introduction-section">
       <div class="section-header">
         <h2>{{ course.title }}</h2>
         <div class="course-meta">
@@ -58,22 +61,22 @@
         </div>
       </div>
 
-      <div class="course-description">
+      <div class="course-description" *ngIf="course.description">
         <p [innerHTML]="course.description"></p>
       </div>
 
-      <div class="course-details">
-        <div class="detail-card">
+      <div class="course-details" *ngIf="hasCourseDetails(course)">
+        <div class="detail-card" *ngIf="course.category">
           <h3>Kategoria</h3>
           <mat-chip>{{ course.category | titlecase }}</mat-chip>
         </div>
 
-        <div class="detail-card">
+        <div class="detail-card" *ngIf="course.instructor">
           <h3>Instruktor</h3>
           <p>{{ course.instructor }}</p>
         </div>
 
-        <div class="detail-card">
+        <div class="detail-card" *ngIf="course.tags?.length">
           <h3>Tagi</h3>
           <mat-chip-listbox class="tags-list">
             <mat-chip-option *ngFor="let tag of course.tags" disabled>
@@ -82,53 +85,55 @@
           </mat-chip-listbox>
         </div>
 
-        <div class="detail-card">
+        <div class="detail-card" *ngIf="course.publishedDate">
           <h3>Data publikacji</h3>
           <p>{{ course.publishedDate | date : "dd.MM.yyyy" }}</p>
         </div>
       </div>
     </section>
 
-    <!-- Basics Section -->
-    <section id="basics" class="content-section">
-      <div class="section-header">
-        <h2>Podstawy</h2>
-      </div>
+    <!-- Dynamic Sections -->
+    <ng-container *ngFor="let section of course.sections; let first = first">
+      <section
+        *ngIf="!first && hasSectionContent(section)"
+        [id]="section.anchor"
+        class="content-section"
+      >
+        <div class="section-header">
+          <h2>{{ section.title }}</h2>
+        </div>
 
-      <div class="videos-container">
-        <app-video-player [videos]="videos$ | async" sectionId="basics">
-        </app-video-player>
-      </div>
-    </section>
+        <div class="videos-container" *ngIf="hasVideosForSection(section.id)">
+          <app-video-player [videos]="videos$ | async" [sectionId]="section.id">
+          </app-video-player>
+        </div>
 
-    <!-- Advanced Section -->
-    <section id="advanced" class="content-section">
-      <div class="section-header">
-        <h2>Zaawansowane tematy</h2>
-      </div>
+        <div class="materials-container" *ngIf="hasPdfsForSection(section.id)">
+          <app-pdf-viewer
+            [pdfs]="pdfs$ | async"
+            [sectionId]="section.id"
+            (error)="onPdfError($event)"
+          >
+          </app-pdf-viewer>
+        </div>
 
-      <div class="videos-container">
-        <app-video-player [videos]="videos$ | async" sectionId="advanced">
-        </app-video-player>
-      </div>
-    </section>
-
-    <!-- Materials Section -->
-    <section id="materials" class="content-section">
-      <div class="section-header">
-        <h2>Materiały do pobrania</h2>
-      </div>
-
-      <div class="materials-container">
-        <app-pdf-viewer [pdfs]="pdfs$ | async" sectionId="materials">
-        </app-pdf-viewer>
-      </div>
-    </section>
+        <div
+          *ngIf="
+            !hasVideosForSection(section.id) && !hasPdfsForSection(section.id)
+          "
+          class="no-content"
+        >
+          <mat-icon>info</mat-icon>
+          <p>Zawartość tej sekcji będzie dostępna wkrótce</p>
+        </div>
+      </section>
+    </ng-container>
   </div>
 </div>
 
-<!-- Loading State -->
-<div class="loading-container" *ngIf="!(course$ | async)">
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  <p>Ładowanie kursu...</p>
-</div>
+<ng-template #loading>
+  <div class="loading-container">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <p>Ładowanie kursu...</p>
+  </div>
+</ng-template>

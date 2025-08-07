@@ -6,7 +6,7 @@
       "subtitle": "Complete Angular Development Course",
       "description": "Kompleksowy kurs Angular, który nauczy Cię wszystkiego, co musisz wiedzieć o tym potężnym frameworku. Kurs obejmuje komponenty, serwisy, routing, formularze i wiele więcej¹.",
       "shortDescription": "Naucz się Angular od podstaw do zaawansowanych technik",
-      "imageUrl": "assets/images/courses/angular-course.jpg",
+      "imageUrl": "assets/images/courses/angular-zdjecie.jpg",
       "duration": "30-40 godzin",
       "difficulty": "intermediate",
       "category": "frontend",
@@ -48,7 +48,7 @@
       "subtitle": "Fundamenty Web Development",
       "description": "Podstawowy kurs HTML i CSS, idealny dla początkujących. Nauczysz się tworzyć responsywne strony internetowe używając najnowszych standardów.",
       "shortDescription": "Podstawy tworzenia stron internetowych",
-      "imageUrl": "assets/images/courses/html-css-course.jpg",
+      "imageUrl": "assets/images/courses/html-zdjecie.png",
       "duration": "12-20 godzin",
       "difficulty": "beginner",
       "category": "frontend",
@@ -59,22 +59,28 @@
       "instructor": "Anna Nowak",
       "sections": [
         {
-          "id": "html-intro",
-          "title": "HTML Podstawy",
-          "anchor": "html-basics",
+          "id": "intro",
+          "title": "Wprowadzenie",
+          "anchor": "introduction",
           "order": 1
         },
         {
-          "id": "css-intro",
-          "title": "CSS Styling",
-          "anchor": "css-styling",
+          "id": "basics",
+          "title": "HTML Podstawy",
+          "anchor": "basics",
           "order": 2
         },
         {
-          "id": "responsive",
-          "title": "Responsive Design",
-          "anchor": "responsive",
+          "id": "advanced",
+          "title": "CSS Styling",
+          "anchor": "advanced",
           "order": 3
+        },
+        {
+          "id": "materials",
+          "title": "Materiały do pobrania",
+          "anchor": "materials",
+          "order": 4
         }
       ]
     },
@@ -84,7 +90,7 @@
       "subtitle": "Advanced CSS Preprocessing",
       "description": "Naucz się wykorzystywać moc SCSS do pisania bardziej efektywnego i maintainable CSS. Kurs obejmuje zmienne, mixiny, funkcje i organizację kodu.",
       "shortDescription": "Zaawansowane techniki CSS z SCSS",
-      "imageUrl": "assets/images/courses/scss-course.jpg",
+      "imageUrl": "assets/images/courses/SCSS-or-CSS.png",
       "duration": "6-10 godzin",
       "difficulty": "intermediate",
       "category": "frontend",
@@ -95,16 +101,28 @@
       "instructor": "Piotr Wiśniewski",
       "sections": [
         {
-          "id": "scss-basics",
-          "title": "SCSS Podstawy",
-          "anchor": "scss-basics",
+          "id": "intro",
+          "title": "Wprowadzenie",
+          "anchor": "introduction",
           "order": 1
         },
         {
-          "id": "advanced-features",
-          "title": "Zaawansowane funkcje",
-          "anchor": "advanced-features",
+          "id": "basics",
+          "title": "SCSS Podstawy",
+          "anchor": "basics",
           "order": 2
+        },
+        {
+          "id": "advanced",
+          "title": "Zaawansowane funkcje",
+          "anchor": "advanced",
+          "order": 3
+        },
+        {
+          "id": "materials",
+          "title": "Materiały do pobrania",
+          "anchor": "materials",
+          "order": 4
         }
       ]
     },
@@ -114,7 +132,7 @@
       "subtitle": "Rapid UI Development",
       "description": "Szybkie tworzenie responsywnych interfejsów użytkownika z Bootstrap. Poznaj komponenty, system gridów i utility classes.",
       "shortDescription": "Framework CSS do szybkiego prototypowania",
-      "imageUrl": "assets/images/courses/bootstrap-course.jpg",
+      "imageUrl": "assets/images/courses/what-is-bootstrap.jpg",
       "duration": "6-8 godzin",
       "difficulty": "beginner",
       "category": "frontend",
@@ -125,16 +143,28 @@
       "instructor": "Maria Kowalczyk",
       "sections": [
         {
-          "id": "bootstrap-intro",
-          "title": "Wprowadzenie do Bootstrap",
-          "anchor": "bootstrap-intro",
+          "id": "intro",
+          "title": "Wprowadzenie",
+          "anchor": "introduction",
           "order": 1
         },
         {
-          "id": "components",
-          "title": "Komponenty Bootstrap",
-          "anchor": "components",
+          "id": "basics",
+          "title": "Wprowadzenie do Bootstrap",
+          "anchor": "basics",
           "order": 2
+        },
+        {
+          "id": "advanced",
+          "title": "Komponenty Bootstrap",
+          "anchor": "advanced",
+          "order": 3
+        },
+        {
+          "id": "materials",
+          "title": "Materiały do pobrania",
+          "anchor": "materials",
+          "order": 4
         }
       ]
     },
@@ -144,7 +174,7 @@
       "subtitle": "Material Design for Angular",
       "description": "Kompleksowy przewodnik po Angular Material. Naucz się implementować Material Design w aplikacjach Angular używając gotowych komponentów.",
       "shortDescription": "Material Design w Angular",
-      "imageUrl": "assets/images/courses/angular-material-course.jpg",
+      "imageUrl": "assets/images/courses/20925.jpg",
       "duration": "8-12 godzin",
       "difficulty": "intermediate",
       "category": "frontend",
@@ -160,22 +190,28 @@
       "instructor": "Tomasz Nowicki",
       "sections": [
         {
-          "id": "material-setup",
-          "title": "Konfiguracja Material",
-          "anchor": "material-setup",
+          "id": "intro",
+          "title": "Wprowadzenie",
+          "anchor": "introduction",
           "order": 1
         },
         {
-          "id": "material-components",
-          "title": "Komponenty Material",
-          "anchor": "material-components",
+          "id": "basics",
+          "title": "Konfiguracja Material",
+          "anchor": "basics",
           "order": 2
         },
         {
-          "id": "theming",
-          "title": "Theming i customizacja",
-          "anchor": "theming",
+          "id": "advanced",
+          "title": "Komponenty Material",
+          "anchor": "advanced",
           "order": 3
+        },
+        {
+          "id": "materials",
+          "title": "Materiały do pobrania",
+          "anchor": "materials",
+          "order": 4
         }
       ]
     }

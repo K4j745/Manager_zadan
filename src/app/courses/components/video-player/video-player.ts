@@ -8,7 +8,7 @@ import { HoverEffectDirective } from '../../directives/hover-effect.directive';
 
 @Component({
   selector: 'app-video-player',
-  imports: [MatIconModule, MatChipsModule, CommonModule, HoverEffectDirective],
+  imports: [MatIconModule, MatChipsModule, CommonModule],
   templateUrl: './video-player.html',
   styleUrl: './video-player.scss',
 })

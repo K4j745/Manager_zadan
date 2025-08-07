@@ -5,7 +5,7 @@
       "courseId": "1",
       "title": "Angular Cheat Sheet",
       "description": "Przydatne komendy i składnia Angular",
-      "url": "assets/pdfs/angular-cheatsheet.pdf",
+      "url": "https://www.cs.put.poznan.pl/mwojciechowski/take/Angular.pdf",
       "pages": 4,
       "order": 1,
       "sectionId": "materials"
@@ -15,7 +15,7 @@
       "courseId": "1",
       "title": "TypeScript Fundamentals",
       "description": "Podstawy TypeScript dla Angular",
-      "url": "assets/pdfs/typescript-fundamentals.pdf",
+      "url": "https://www.tutorialspoint.com/typescript/typescript_tutorial.pdf",
       "pages": 12,
       "order": 2,
       "sectionId": "materials"
@@ -25,7 +25,7 @@
       "courseId": "1",
       "title": "RxJS Operators Guide",
       "description": "Przewodnik po operatorach RxJS",
-      "url": "assets/pdfs/rxjs-operators.pdf",
+      "url": "https://www.tutorialspoint.com/rxjs/rxjs_tutorial.pdf",
       "pages": 8,
       "order": 3,
       "sectionId": "materials"
@@ -35,60 +35,60 @@
       "courseId": "2",
       "title": "HTML5 Reference",
       "description": "Kompletna referencia HTML5",
-      "url": "assets/pdfs/html5-reference.pdf",
+      "url": "https://ebooks.allfree-stuff.com/eBooks_down/HTML5%20and%20CSS3/HTML5%20For%20Dummies%20Quick%20Reference%20-%20A%20Harris%20-%20Wiley.pdf",
       "pages": 15,
       "order": 1,
-      "sectionId": "html-intro"
+      "sectionId": "materials"
     },
     {
       "id": "p5",
       "courseId": "2",
       "title": "CSS3 Properties Guide",
       "description": "Przewodnik po właściwościach CSS3",
-      "url": "assets/pdfs/css3-properties.pdf",
+      "url": "https://www.scribd.com/document/655359734/List-of-CSS3-Properties-Tutorial-Republic",
       "pages": 20,
       "order": 2,
-      "sectionId": "css-intro"
+      "sectionId": "materials"
     },
     {
       "id": "p6",
       "courseId": "3",
       "title": "SCSS Functions Reference",
       "description": "Dokumentacja funkcji SCSS",
-      "url": "assets/pdfs/scss-functions.pdf",
+      "url": "https://assets.ctfassets.net/6zi14rd5umxw/7tInOHv3Ji7NuN8AGn0ghm/e944ced810cef0b09b6de71b8bdf78d4/sass-basics.pdf",
       "pages": 6,
       "order": 1,
-      "sectionId": "advanced-features"
+      "sectionId": "materials"
     },
     {
       "id": "p7",
       "courseId": "4",
       "title": "Bootstrap Components Cheatsheet",
       "description": "Szybka referencia komponentów Bootstrap",
-      "url": "assets/pdfs/bootstrap-components.pdf",
+      "url": "assets/pdfs/Bootstrap-Cheat-Sheet-websitesetup.org_.pdf",
       "pages": 10,
       "order": 1,
-      "sectionId": "components"
+      "sectionId": "materials"
     },
     {
       "id": "p8",
       "courseId": "5",
       "title": "Material Design Principles",
       "description": "Zasady Material Design",
-      "url": "assets/pdfs/material-design-principles.pdf",
+      "url": "https://www.tutorialspoint.com/angular_material/angular_material_tutorial.pdf",
       "pages": 25,
       "order": 1,
-      "sectionId": "material-setup"
+      "sectionId": "materials"
     },
     {
       "id": "p9",
       "courseId": "5",
       "title": "Angular Material Theming Guide",
       "description": "Przewodnik po themingu w Material",
-      "url": "assets/pdfs/material-theming.pdf",
+      "url": "https://unidel.edu.ng/focelibrary/books/Learning%20Angular%20A%20no-nonsense%20beginners%20guide%20to%20building%20web%20applications%20with%20Angular%2010%20and%20TypeScript%20by%20Aristeidis%20Bampakos,%20Pablo%20Deeleman%20(z-lib.org).pdf",
       "pages": 8,
       "order": 2,
-      "sectionId": "theming"
+      "sectionId": "materials"
     }
   ]
 }

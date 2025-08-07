@@ -1,49 +1,29 @@
-import {
-  ApplicationConfig,
-  importProvidersFrom,
-  provideBrowserGlobalErrorListeners,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
-import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { routes } from './app.routes';
 
 // NGXS imports
-import { NgxsModule, provideStore } from '@ngxs/store';
-import {
-  NgxsReduxDevtoolsPluginModule,
-  withNgxsReduxDevtoolsPlugin,
-} from '@ngxs/devtools-plugin';
-
-import { FlashcardsState } from '../state/flashcard.state'; // Twoja ścieżka
-import { environment } from '../environments/enviroment';
-import { CoursesState } from './courses/store/courses.state';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { environment } from '../environments/enviroment';
+import { FlashcardsState } from '../state/flashcard.state';
+import { CoursesState } from './courses/store/courses.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-
-    // Konfiguracja NGXS
-    provideStore(
-      [FlashcardsState],
-      withNgxsReduxDevtoolsPlugin({
-        disabled: environment.production,
-      })
-    ),
     importProvidersFrom(
-      NgxsModule.forRoot([CoursesState], {
-        developmentMode: true,
-      }),
-      NgxsLoggerPluginModule.forRoot({
-        disabled: false,
+      NgxsModule.forRoot([FlashcardsState, CoursesState], {
+        developmentMode: !environment.production,
       }),
       NgxsReduxDevtoolsPluginModule.forRoot({
-        disabled: false,
+        disabled: environment.production,
+      }),
+      NgxsLoggerPluginModule.forRoot({
+        disabled: environment.production,
       })
     ),
   ],

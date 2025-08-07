@@ -6,9 +6,9 @@
       "title": "Wprowadzenie do Angular",
       "description": "Podstawowe pojęcia i architektura Angular",
       "url": "https://www.youtube.com/embed/3qBXWUpoPHo",
-      "duration": 1200,
+      "duration": 63233,
       "order": 1,
-      "sectionId": "intro"
+      "sectionId": "basics"
     },
     {
       "id": "v2",
@@ -16,7 +16,7 @@
       "title": "Komponenty w Angular",
       "description": "Jak tworzyć i używać komponenty",
       "url": "https://www.youtube.com/embed/23o0evRtrFI",
-      "duration": 1800,
+      "duration": 832,
       "order": 2,
       "sectionId": "basics"
     },
@@ -26,7 +26,7 @@
       "title": "Services i Dependency Injection",
       "description": "Zaawansowane wzorce w Angular",
       "url": "https://www.youtube.com/embed/0BikjL858OQ",
-      "duration": 2100,
+      "duration": 1214,
       "order": 3,
       "sectionId": "advanced"
     },
@@ -36,9 +36,9 @@
       "title": "HTML5 Semantic Elements",
       "description": "Nowoczesny HTML5 i semantyka",
       "url": "https://www.youtube.com/embed/UB1O30fR-EE",
-      "duration": 900,
+      "duration": 3641,
       "order": 1,
-      "sectionId": "html-intro"
+      "sectionId": "basics"
     },
     {
       "id": "v5",
@@ -46,19 +46,19 @@
       "title": "CSS Grid i Flexbox",
       "description": "Nowoczesne layouty CSS",
       "url": "https://www.youtube.com/embed/jV8B24rSN5o",
-      "duration": 1500,
+      "duration": 1674,
       "order": 2,
-      "sectionId": "css-intro"
+      "sectionId": "advanced"
     },
     {
       "id": "v6",
       "courseId": "3",
       "title": "SCSS Variables i Mixins",
       "description": "Podstawy SCSS preprocessing",
-      "url": "https://www.youtube.com/embed/Zz6eOVaaelI",
-      "duration": 1100,
+      "url": "https://youtube.com/embed/ZzfMJK5mSvs",
+      "duration": 5807,
       "order": 1,
-      "sectionId": "scss-basics"
+      "sectionId": "basics"
     },
     {
       "id": "v7",
@@ -66,19 +66,39 @@
       "title": "Bootstrap Grid System",
       "description": "Responsywne layouty z Bootstrap",
       "url": "https://www.youtube.com/embed/qmPmwdshCMw",
-      "duration": 800,
+      "duration": 1121,
       "order": 1,
-      "sectionId": "bootstrap-intro"
+      "sectionId": "basics"
     },
     {
       "id": "v8",
+      "courseId": "4",
+      "title": "Bootstrap Components",
+      "description": "Dostępne komponenty Bootstrap, jak i kiedy z nich korzystać",
+      "url": "https://youtube.com/embed/IsGzn11SWC0",
+      "duration": 912,
+      "order": 2,
+      "sectionId": "advanced"
+    },
+    {
+      "id": "v9",
       "courseId": "5",
       "title": "Angular Material Setup",
       "description": "Konfiguracja Material Design",
       "url": "https://www.youtube.com/embed/bV8emCBmFHk",
-      "duration": 1000,
+      "duration": 161,
       "order": 1,
-      "sectionId": "material-setup"
+      "sectionId": "basics"
+    },
+    {
+      "id": "v10",
+      "courseId": "5",
+      "title": "Material Design Components",
+      "description": "Rozpoznanie materiałów dostępnych w Angular Material",
+      "url": "https://youtube.com/embed/n0N42IzxFMg",
+      "duration": 1878,
+      "order": 2,
+      "sectionId": "advanced"
     }
   ]
 }

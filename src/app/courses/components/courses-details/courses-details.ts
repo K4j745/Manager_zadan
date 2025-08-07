@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { BehaviorSubject, Observable, Subject, combineLatest, of } from 'rxjs';
-import { takeUntil, switchMap, filter, catchError, tap } from 'rxjs/operators';
-import { Course, Video, PdfDocument } from '../../models/course-interface'; // Upewnij się, że to poprawna ścieżka
+import { Observable, BehaviorSubject, combineLatest, of, Subject } from 'rxjs';
+import { takeUntil, switchMap, filter, catchError } from 'rxjs/operators';
+import { Course, Video, PdfDocument } from '../../models/course-interface';
 import { CoursesState } from '../../store/courses.state';
 import { LoadCourseById } from '../../store/courses.actions';
 import { VideoService } from '../../../services/video.service';
@@ -38,9 +38,8 @@ export class CoursesDetails implements OnInit, OnDestroy {
   activeSection = 'introduction';
 
   course$: Observable<Course | null>;
-  videos$ = new BehaviorSubject<Video[]>([]); // Zmienione na BehaviorSubject
-  pdfs$ = new BehaviorSubject<PdfDocument[]>([]); // Zmienione na BehaviorSubject
-  loading$: Observable<boolean>;
+  videos$ = new BehaviorSubject<Video[]>([]);
+  pdfs$ = new BehaviorSubject<PdfDocument[]>([]);
 
   constructor(
     private route: ActivatedRoute,
@@ -50,64 +49,34 @@ export class CoursesDetails implements OnInit, OnDestroy {
     private pdfService: PdfService
   ) {
     this.course$ = this.store.select(CoursesState.getSelectedCourse);
-    this.loading$ = this.store.select(CoursesState.isLoading);
-
-    // Debugowanie
-    this.course$.pipe(takeUntil(this.destroy$)).subscribe((course) => {
-      console.log('[DEBUG] Current course:', course);
-    });
   }
 
   ngOnInit(): void {
-    console.log(
-      '[DEBUG] Initializing component with route params:',
-      this.route.snapshot.params
-    );
-
     this.route.params
       .pipe(
         takeUntil(this.destroy$),
         filter((params) => !!params['id']),
-        tap((params) =>
-          console.log('[DEBUG] Processing course ID:', params['id'])
-        ),
         switchMap((params) => {
           const courseId = params['id'];
-
-          // Najpierw dispatch akcji i poczekaj na jej zakończenie
-          return this.store.dispatch(new LoadCourseById(courseId)).pipe(
-            // Po zakończeniu dispatch, pobierz dane
-            switchMap(() =>
-              combineLatest([
-                this.videoService.getVideosByCourseId(courseId).pipe(
-                  catchError((err) => {
-                    console.error('[ERROR] Failed to load videos:', err);
-                    return of([]);
-                  })
-                ),
-                this.pdfService.getPdfsByCourseId(courseId).pipe(
-                  catchError((err) => {
-                    console.error('[ERROR] Failed to load PDFs:', err);
-                    return of([]);
-                  })
-                ),
-                this.store.selectOnce(CoursesState.getSelectedCourse), // Pobierz aktualny kurs
-              ])
-            )
-          );
+          return combineLatest([
+            this.store.dispatch(new LoadCourseById(courseId)),
+            this.videoService
+              .getVideosByCourseId(courseId)
+              .pipe(catchError(() => of([]))),
+            this.pdfService
+              .getPdfsByCourseId(courseId)
+              .pipe(catchError(() => of([]))),
+          ]);
         })
       )
       .subscribe({
-        next: ([videos, pdfs, course]) => {
-          console.log('[DEBUG] Loaded data:', { course, videos, pdfs });
+        next: ([_, videos, pdfs]) => {
           this.videos$.next(videos);
           this.pdfs$.next(pdfs);
         },
-        error: (err) =>
-          console.error('[ERROR] Failed to load course data:', err),
+        error: (err) => console.error('Error loading course:', err),
       });
 
-    // Obsługa fragmentów URL
     this.route.fragment
       .pipe(
         takeUntil(this.destroy$),
@@ -124,6 +93,33 @@ export class CoursesDetails implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  hasCourseDetails(course: Course): boolean {
+    return (
+      !!course.category ||
+      !!course.instructor ||
+      !!course.tags?.length ||
+      !!course.publishedDate
+    );
+  }
+
+  hasSectionContent(section: any): boolean {
+    return (
+      !!section?.title &&
+      (this.hasVideosForSection(section.id) ||
+        this.hasPdfsForSection(section.id))
+    );
+  }
+
+  hasVideosForSection(sectionId: string): boolean {
+    const videos = this.videos$.value;
+    return videos?.some((v) => v.sectionId === sectionId) ?? false;
+  }
+
+  hasPdfsForSection(sectionId: string): boolean {
+    const pdfs = this.pdfs$.value;
+    return pdfs?.some((p) => p.sectionId === sectionId) ?? false;
+  }
+
   navigateToSection(anchor: string): void {
     this.router.navigate([], {
       relativeTo: this.route,
@@ -134,14 +130,17 @@ export class CoursesDetails implements OnInit, OnDestroy {
 
   private scrollToSection(anchor: string): void {
     setTimeout(() => {
-      const element = document.getElementById(anchor);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      document.getElementById(anchor)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
     }, 100);
   }
 
   goBack(): void {
     this.router.navigate(['/courses']);
+  }
+  onPdfError(error: any) {
+    console.error('PDF loading error:', error);
   }
 }

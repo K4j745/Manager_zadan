@@ -23,6 +23,7 @@ import { HoverEffectDirective } from '../../directives/hover-effect.directive';
 export class PdfViewer implements OnChanges {
   @Input() pdfs: PdfDocument[] | null = null;
   @Input() sectionId!: string;
+  pdfUrl: string = '';
 
   sectionPdfs: PdfDocument[] = [];
   selectedPdf: PdfDocument | null = null;
@@ -43,6 +44,7 @@ export class PdfViewer implements OnChanges {
   }
 
   selectPdf(pdf: PdfDocument): void {
+    console.log('Selected PDF URL:', pdf.url); // Sprawdzenie URL PDF
     this.selectedPdf = pdf;
     this.showPdfViewer = true;
   }
