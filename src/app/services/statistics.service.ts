@@ -102,8 +102,8 @@ export class StatisticsService {
 
     this.liveDataSubject.next(initialData);
 
-    // Aktualizacja co 5 sekund
-    interval(5000).subscribe(() => {
+    // Aktualizacja co 2 sekundy
+    interval(2000).subscribe(() => {
       const currentData = this.liveDataSubject.value;
       const newData = [...currentData];
 

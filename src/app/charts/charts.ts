@@ -36,13 +36,13 @@ Chart.register(...registerables);
   templateUrl: './charts.html',
   styleUrls: ['./charts.scss'],
   animations: [
-    trigger('slideInUp', [
-      state('in', style({ transform: 'translateY(0)', opacity: 1 })),
-      transition('void => *', [
-        style({ transform: 'translateY(50px)', opacity: 0 }),
-        animate('0.6s ease-out'),
-      ]),
-    ]),
+    // trigger('slideInUp', [
+    //   state('in', style({ transform: 'translateY(0)', opacity: 1 })),
+    //   transition('void => *', [
+    //     style({ transform: 'translateY(50px)', opacity: 0 }),
+    //     animate('0.6s ease-out'),
+    //   ]),
+    // ]),
     trigger('staggerIn', [
       transition('* => *', [
         query(
