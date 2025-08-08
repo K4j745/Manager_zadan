@@ -1,127 +1,154 @@
-<!-- statistics.component.html -->
-<!-- <div class="statistics-container" [@staggerIn]> -->
 <div class="statistics-container">
-  <!-- Nagłówek z podsumowaniem -->
-  <div class="stats-header" [@slideInUp]>
-    <h2>Statystyki Nauki</h2>
-    <div class="quick-stats">
-      <div class="stat-card">
-        <div class="stat-value">{{ getTotalTasks() }}</div>
-        <div class="stat-label">Zadania</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">{{ getTotalFlashcards() }}</div>
-        <div class="stat-label">Fiszki</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">{{ getTotalStudyTime() }}</div>
-        <div class="stat-label">Min. nauki</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">{{ getDailyAverage() }}</div>
-        <div class="stat-label">Średnio/dzień</div>
-      </div>
-    </div>
-    <button class="refresh-btn" (click)="refreshData()">
-      <i class="fas fa-sync-alt"></i>
-      Odśwież dane
-    </button>
-  </div>
+  <!-- Header with summary stats -->
+  <mat-card class="stats-header" [@slideInUp]>
+    <mat-card-header>
+      <mat-card-title>Statystyki Nauki</mat-card-title>
+    </mat-card-header>
 
-  <!-- Siatka wykresów -->
+    <mat-card-content>
+      <div class="quick-stats">
+        <mat-card class="stat-card" *ngFor="let stat of quickStats">
+          <mat-card-content>
+            <div class="stat-value">{{ stat.value }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        class="refresh-btn"
+        (click)="refreshData()"
+      >
+        <mat-icon>refresh</mat-icon>
+        Odśwież dane
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Charts grid -->
   <div class="charts-grid">
-    <!-- Wykres słupkowy -->
-    <div class="chart-container" [@slideInUp]>
-      <div class="chart-header">
-        <h3>Aktywność w ostatnich 15 dniach</h3>
-      </div>
-      <div class="chart-wrapper">
-        <canvas
-          baseChart
-          [type]="'bar'"
-          [data]="barChartData"
-          [options]="barChartOptions"
-        >
-        </canvas>
-      </div>
-    </div>
+    <!-- Bar chart -->
+    <mat-card class="chart-container" [@slideInUp]>
+      <mat-card-header>
+        <mat-card-title>Aktywność w ostatnich 15 dniach</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-wrapper">
+          <canvas
+            baseChart
+            [type]="'bar'"
+            [data]="barChartData"
+            [options]="barChartOptions"
+          ></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
-    <!-- Wykres liniowy -->
-    <div class="chart-container" [@slideInUp]>
-      <div class="chart-header">
-        <h3>Czas nauki dziennie</h3>
-      </div>
-      <div class="chart-wrapper">
-        <canvas
-          baseChart
-          [type]="'line'"
-          [data]="lineChartData"
-          [options]="lineChartOptions"
-        >
-        </canvas>
-      </div>
-    </div>
+    <!-- Line chart -->
+    <mat-card class="chart-container" [@slideInUp]>
+      <mat-card-header>
+        <mat-card-title>Czas nauki dziennie</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-wrapper">
+          <canvas
+            baseChart
+            [type]="'line'"
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+          ></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
-    <!-- Wykres kołowy -->
-    <div class="chart-container" [@slideInUp]>
-      <div class="chart-header">
-        <h3>Rozkład aktywności</h3>
-      </div>
-      <div class="chart-wrapper">
-        <canvas
-          baseChart
-          [type]="'pie'"
-          [data]="pieChartData"
-          [options]="pieChartOptions"
-        >
-        </canvas>
-      </div>
-    </div>
+    <!-- Pie chart -->
+    <mat-card class="chart-container" [@slideInUp]>
+      <mat-card-header>
+        <mat-card-title>Rozkład aktywności</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-wrapper">
+          <canvas
+            baseChart
+            [type]="'pie'"
+            [data]="pieChartData"
+            [options]="pieChartOptions"
+          ></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
-    <!-- Wykres live -->
-    <div class="chart-container">
-      <div class="chart-header">
-        <h3>Aktywność na żywo</h3>
-      </div>
-      <div class="chart-wrapper">
-        <canvas
-          baseChart
-          [type]="'line'"
-          [data]="liveChartData"
-          [options]="liveChartOptions"
-        >
-        </canvas>
-      </div>
-    </div>
+    <!-- Live chart -->
+    <mat-card class="chart-container" [@slideInUp]>
+      <mat-card-header>
+        <mat-card-title>Aktywność na żywo</mat-card-title>
+        <!-- <mat-chip-list>
+          <mat-chip color="warn" selected>
+            <mat-icon class="live-icon">fiber_manual_record</mat-icon>
+            LIVE
+          </mat-chip>
+        </mat-chip-list> -->
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-wrapper">
+          <canvas
+            baseChart
+            [type]="'line'"
+            [data]="liveChartData"
+            [options]="liveChartOptions"
+          ></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
-  <!-- Dodatkowe statystyki -->
-  <div class="additional-stats" [@slideInUp]>
-    <div class="trend-analysis">
-      <h3>Analiza trendu</h3>
+  <!-- Additional stats -->
+  <mat-card class="additional-stats" [@slideInUp]>
+    <mat-card-header>
+      <mat-card-title>Analiza trendu</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
       <div class="trend-cards">
-        <div class="trend-card positive">
-          <div class="trend-icon">📈</div>
-          <div class="trend-info">
-            <span class="trend-value">+15%</span>
-            <span class="trend-label">Wzrost aktywności</span>
-          </div>
-        </div>
-        <div class="trend-card neutral">
-          <div class="trend-icon">📊</div>
-          <div class="trend-info">
-            <span class="trend-value">{{ getDailyAverage() }} min</span>
-            <span class="trend-label">Średnia dzienna</span>
-          </div>
-        </div>
-        <div class="trend-card positive">
-          <div class="trend-icon">🎯</div>
-          <div class="trend-info">
-            <span class="trend-value">85%</span>
-            <span class="trend-label">Cel osiągnięty</span>
-          </div>
-        </div>
+        <mat-card class="trend-card positive">
+          <mat-card-content>
+            <div class="trend-icon">
+              <mat-icon>trending_up</mat-icon>
+            </div>
+            <div class="trend-info">
+              <span class="trend-value">+15%</span>
+              <span class="trend-label">Wzrost aktywności</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="trend-card neutral">
+          <mat-card-content>
+            <div class="trend-icon">
+              <mat-icon>trending_flat</mat-icon>
+            </div>
+            <div class="trend-info">
+              <span class="trend-value">{{ getDailyAverage() }} min</span>
+              <span class="trend-label">Średnia dzienna</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="trend-card positive">
+          <mat-card-content>
+            <div class="trend-icon">
+              <mat-icon>check_circle</mat-icon>
+            </div>
+            <div class="trend-info">
+              <span class="trend-value">85%</span>
+              <span class="trend-label">Cel osiągnięty</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
       </div>
-    </div>
-  </div>
+    </mat-card-content>
+  </mat-card>
 </div>

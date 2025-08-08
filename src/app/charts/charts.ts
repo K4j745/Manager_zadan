@@ -25,6 +25,12 @@ import {
   LiveData,
 } from '../services/statistics.service';
 import { Subscription } from 'rxjs';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 // Rejestracja wszystkich komponentów Chart.js
 Chart.register(...registerables);
@@ -32,17 +38,19 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-charts',
   standalone: true,
-  imports: [CommonModule, BaseChartDirective],
+  imports: [
+    CommonModule,
+    BaseChartDirective,
+    MatCardModule,
+    MatDividerModule,
+    MatIconModule,
+    MatChipsModule,
+    MatProgressBarModule,
+    MatButtonModule,
+  ],
   templateUrl: './charts.html',
   styleUrls: ['./charts.scss'],
   animations: [
-    // trigger('slideInUp', [
-    //   state('in', style({ transform: 'translateY(0)', opacity: 1 })),
-    //   transition('void => *', [
-    //     style({ transform: 'translateY(50px)', opacity: 0 }),
-    //     animate('0.6s ease-out'),
-    //   ]),
-    // ]),
     trigger('staggerIn', [
       transition('* => *', [
         query(
@@ -67,6 +75,14 @@ export class Charts implements OnInit, OnDestroy {
   dailyActivities: DailyActivity[] = [];
   activityDistribution: ActivityDistribution[] = [];
   liveData: LiveData[] = [];
+
+  // Quick stats data
+  quickStats: Array<{ value: number | string; label: string }> = [
+    { value: 0, label: 'Zadania' },
+    { value: 0, label: 'Fiszki' },
+    { value: 0, label: 'Min. nauki' },
+    { value: 0, label: 'Średnio/dzień' },
+  ];
 
   // Konfiguracje wykresów
   public barChartOptions: ChartOptions<'bar'> = {
@@ -151,6 +167,14 @@ export class Charts implements OnInit, OnDestroy {
     this.dailyActivities = this.statisticsService.generateDailyActivities();
     this.activityDistribution =
       this.statisticsService.generateActivityDistribution();
+
+    // Update quick stats
+    this.quickStats = [
+      { value: this.getTotalTasks(), label: 'Zadania' },
+      { value: this.getTotalFlashcards(), label: 'Fiszki' },
+      { value: this.getTotalStudyTime(), label: 'Min. nauki' },
+      { value: this.getDailyAverage(), label: 'Średnio/dzień' },
+    ];
 
     // Aktualizacja danych wykresu słupkowego
     this.barChartData = {

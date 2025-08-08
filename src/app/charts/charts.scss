@@ -1,7 +1,7 @@
 /* Główny kontener */
 .statistics-container {
   padding: 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--mat-sys-surface-container-lowest);
   min-height: 100vh;
   font-family: "Helvetica Neue", sans-serif !important;
   overflow-x: hidden;
@@ -14,11 +14,10 @@
     max-width: 100%;
 
     h2 {
-      color: white;
+      color: var(--mat-sys-on-surface);
       font-size: 2.5rem;
       font-weight: 300;
       margin-bottom: 16px;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .quick-stats {
@@ -30,9 +29,8 @@
       max-width: 100%;
 
       .stat-card {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: var(--mat-sys-surface-container-high);
+        border: 1px solid var(--mat-sys-outline);
         border-radius: 16px;
         padding: 20px;
         min-width: 120px;
@@ -42,20 +40,20 @@
 
         &:hover {
           transform: translateY(-5px);
-          background: rgba(255, 255, 255, 0.25);
+          background: var(--mat-sys-surface-container);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .stat-value {
           font-size: 2rem;
           font-weight: bold;
-          color: white;
+          color: var(--mat-sys-primary);
           margin-bottom: 8px;
         }
 
         .stat-label {
           font-size: 0.9rem;
-          color: rgba(255, 255, 255, 0.8);
+          color: var(--mat-sys-on-surface-variant);
           text-transform: uppercase;
           letter-spacing: 0.5px;
         }
@@ -63,19 +61,17 @@
     }
 
     .refresh-btn {
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: var(--mat-sys-secondary-container);
+      border: 1px solid var(--mat-sys-outline);
       border-radius: 25px;
       padding: 12px 24px;
-      color: white;
+      color: var(--mat-sys-on-secondary-container);
       font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      max-width: 100%;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.3);
+        background: var(--mat-sys-secondary-container);
         transform: translateY(-2px);
       }
 
@@ -105,12 +101,11 @@
     }
 
     .chart-container {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
+      background: var(--mat-sys-surface);
       border-radius: 20px;
       padding: 24px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 1px 3px var(--mat-sys-shadow);
+      border: 1px solid var(--mat-sys-outline);
       transition: all 0.3s ease;
       width: 100%;
       box-sizing: border-box;
@@ -121,16 +116,15 @@
       }
 
       &.live-chart {
-        border: 2px solid #ff6b6b;
-        //animation: pulse-border 2s infinite;
+        border: 2px solid var(--mat-sys-error);
 
         @keyframes pulse-border {
           0%,
           100% {
-            border-color: #ff6b6b;
+            border-color: var(--mat-sys-error);
           }
           50% {
-            border-color: #ff8e8e;
+            border-color: var(--mat-sys-error-container);
           }
         }
       }
@@ -142,13 +136,13 @@
 
         h3 {
           font-size: 1.3rem;
-          color: #333;
+          color: var(--mat-sys-on-surface);
           margin-bottom: 4px;
           font-weight: 600;
         }
 
         p {
-          color: #666;
+          color: var(--mat-sys-on-surface-variant);
           font-size: 0.9rem;
           margin: 0;
         }
@@ -164,9 +158,8 @@
           .live-dot {
             width: 10px;
             height: 10px;
-            background: #ff6b6b;
+            background: var(--mat-sys-error);
             border-radius: 50%;
-            //animation: blink 0.1s infinite;
 
             @keyframes blink {
               0%,
@@ -183,7 +176,7 @@
           .live-text {
             font-size: 0.8rem;
             font-weight: bold;
-            color: #ff6b6b;
+            color: var(--mat-sys-error);
             letter-spacing: 0.5px;
           }
         }
@@ -208,16 +201,15 @@
     box-sizing: border-box;
 
     .trend-analysis {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
+      background: var(--mat-sys-surface);
       border-radius: 20px;
       padding: 24px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 1px 3px var(--mat-sys-shadow);
+      border: 1px solid var(--mat-sys-outline);
       width: 100%;
 
       h3 {
-        color: #333;
+        color: var(--mat-sys-on-surface);
         font-size: 1.3rem;
         margin-bottom: 20px;
         font-weight: 600;
@@ -241,13 +233,13 @@
           box-sizing: border-box;
 
           &.positive {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
+            background: var(--mat-sys-primary-container);
+            color: var(--mat-sys-on-primary-container);
           }
 
           &.neutral {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            color: white;
+            background: var(--mat-sys-tertiary-container);
+            color: var(--mat-sys-on-tertiary-container);
           }
 
           &:hover {
@@ -310,6 +302,7 @@
     }
 
     .charts-grid {
+      padding-top: 50px;
       .chart-container {
         padding: 16px;
 
@@ -352,11 +345,11 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.4),
+      rgba(var(--mat-sys-on-surface-rgb), 0.4),
       transparent
     );
     transform: translateX(-100%);
-    animation: shimmer 2s; //infinite;
+    animation: shimmer 2s;
     z-index: 1;
     pointer-events: none;
   }
